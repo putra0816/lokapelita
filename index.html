@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LokaPelita — Belajar Uang, Rawat Diri</title>
+<meta name="description" content="Ruang belajar finansial dan kesehatan sehari-hari bersama Loka & Pelita. Baca panduan singkat, coba kalkulator dana darurat, investasi, dan FIRE, lalu uji pemahamanmu lewat kuis finansial dan kuis kesehatan.">
+<meta name="theme-color" content="#fcfaf4">
+<meta property="og:title" content="LokaPelita — Belajar Uang, Rawat Diri">
+<meta property="og:description" content="Panduan finansial dan kebiasaan sehat, satu langkah kecil tiap hari.">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+<script src="assets/tools.js" defer></script>
+</head>
+<body>
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14m-7-7v14"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Zm0 0 14-3v3m4 5h-5a2 2 0 0 0 0 4h5"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 8.8c0 4.1-8.8 9.9-8.8 9.9s-8.8-5.8-8.8-9.9A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8.8 1.8Z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5v14M3 4h5a4 4 0 0 1 4 3 4 4 0 0 1 4-3h5v14h-5a4 4 0 0 0-4 2 4 4 0 0 0-4-2H3V4Z"/></symbol>
+  <symbol id="i-insta" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 1.5c.9 6.4 4.1 9.6 10.5 10.5-6.4.9-9.6 4.1-10.5 10.5C11.1 16.1 7.9 12.9 1.5 12 7.9 11.1 11.1 7.9 12 1.5Z"/></symbol>
+</svg>
+<a class="skip" href="#isi">Lewati ke isi</a>
+<aside class="collab-bar" aria-label="Kolaborasi dan kemitraan"><div class="wrap collab-row"><p><strong>Kolaborasi &amp; mitra:</strong> ingin memasarkan produk atau bekerja sama dengan LokaPelita?</p><a href="https://www.instagram.com/lokapelitafinancial/" rel="noopener">Ajukan kolaborasi <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></div></aside>
+<header class="top">
+  <div class="wrap nav-row">
+    <a class="brand" href="#beranda"><img class="brand-logo" src="assets/logo.webp" width="58" height="57" alt=""><span>Loka<span class="brand-blue">Pelita</span></span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-utama" hidden><svg class="icon"><use href="#i-menu"/></svg><span>Menu</span></button>
+    <nav id="nav-utama" class="nav" aria-label="Navigasi utama">
+      <a href="#finansial">Finansial</a><a href="#kesehatan">Kesehatan</a><a href="#kuis">Kuis Finansial</a><a href="#kuis-kesehatan">Kuis Kesehatan</a>
+      <a class="nav-cta" href="#simulasi">Coba Simulasi <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+    </nav>
+  </div>
+</header>
+<main id="isi" tabindex="-1">
+  <section class="hero wrap" id="beranda" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="kicker-dot"></span> Ruang belajar Loka &amp; Pelita</p>
+      <h1 id="hero-title">Belajar uang,<br><span>rawat diri.</span></h1>
+      <p class="hero-lede">Rapikan keuangan dan bangun kebiasaan sehat bersama Loka yang ceria dan Pelita yang tenang. Mulai dari satu langkah kecil hari ini.</p>
+      <div class="actions">
+        <a class="btn primary" href="#finansial">Jelajahi Finansial <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn secondary" href="#kesehatan">Jelajahi Kesehatan</a>
+      </div>
+      <p class="hero-foot"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg> Materi edukasi umum · Terbuka untuk semua pembaca</p>
+    </div>
+    <div class="hero-art">
+      <div class="hero-art-label" aria-hidden="true"><span class="light-dot"></span> TEMAN BELAJAR HARIAN</div>
+      <svg class="hero-spark spark-a" aria-hidden="true"><use href="#i-star"/></svg>
+      <svg class="hero-spark spark-b" aria-hidden="true"><use href="#i-star"/></svg>
+      <div class="portrait portrait-loka">
+        <span class="portrait-shape" aria-hidden="true"></span>
+        <img src="assets/loka-happy.webp" width="410" height="429" alt="Loka tersenyum ceria" fetchpriority="high">
+        <span class="name-tag">Loka</span>
+      </div>
+      <div class="portrait portrait-pelita">
+        <span class="portrait-shape" aria-hidden="true"></span>
+        <img src="assets/pelita-explaining.webp" width="355" height="450" alt="Pelita sedang menjelaskan" fetchpriority="high">
+        <span class="name-tag">Pelita</span>
+      </div>
+      <span class="art-foot" aria-hidden="true"><i></i> LANGKAH KECIL TIAP HARI <i></i></span>
+    </div>
+  </section>
+
+  <div class="wrap quick-wrap">
+    <nav class="quick" aria-label="Pilih topik belajar">
+      <a href="#finansial"><span class="tile-icon blue"><svg class="icon" aria-hidden="true"><use href="#i-wallet"/></svg></span><span><strong>Finansial bersama Pelita</strong><small>Anggaran, investasi, asuransi, dan pensiun</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="#i-external"/></svg></a>
+      <a href="#kesehatan"><span class="tile-icon yellow"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></span><span><strong>Kesehatan bersama Loka</strong><small>Gerak, pola makan seimbang, tidur, dan kesehatan mental</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="#i-external"/></svg></a>
+    </nav>
+  </div>
+
+  <section class="section wrap" id="finansial" aria-labelledby="fin-title">
+    <p class="eyebrow blue-text"><span class="section-number">01</span> Finansial bersama Pelita</p>
+    <div class="section-heading"><h2 id="fin-title">Uang lebih terarah.</h2><p>Atur pengeluaran hari ini, pahami risikonya, lalu siapkan tujuan jangka panjang.</p></div>
+    <div class="path-grid">
+      <div class="path-visual finance-visual">
+        <b class="visual-tag"><svg class="icon" aria-hidden="true"><use href="#i-wallet"/></svg> Catatan Pelita</b>
+        <img src="assets/pelita-teaching.webp" width="369" height="450" loading="lazy" decoding="async" alt="Pelita mengajar">
+        <p>“Kita mulai dari apa yang bisa kamu ukur.”</p>
+      </div>
+      <div class="lessons">
+        <details class="lesson" id="anggaran">
+          <summary><span><small>01 · Anggaran</small><strong>Gajian lewat, saldo ikut lewat?</strong></span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <div class="lesson-body"><p>Catat uang yang masuk dan keluar selama satu minggu. Tandai pengeluaran wajib, seperti makan dan transportasi, lalu pisahkan pengeluaran yang bisa ditunda.</p><p><strong>Coba hari ini:</strong> pilih satu pengeluaran yang ingin kamu batasi minggu depan. Tentukan batas yang masuk akal, lalu lihat hasilnya setelah seminggu.</p><p class="ref-title">Referensi belajar</p><ul class="ref-list"><li><a href="https://sikapiuangmu.ojk.go.id/FrontEnd/CMS/Download/549" rel="noopener">Buku Agenda Pengelolaan Keuangan (OJK) <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li><li><a href="https://sikapiuangmu.ojk.go.id/FrontEnd/CMS/Download/539" rel="noopener">Buku Saku Cerdas Mengelola Keuangan (OJK) <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li></ul></div>
+        </details>
+        <details class="lesson" id="dana-darurat">
+          <summary><span><small>02 · Dana darurat</small><strong>Siapkan cadangan untuk hal tak terduga</strong></span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <div class="lesson-body"><p>Dana darurat adalah uang cadangan untuk kebutuhan mendesak, misalnya saat pendapatan turun atau muncul biaya tak terduga. Hitung dulu pengeluaran pokok bulanan. Pilih target sesuai kestabilan penghasilan dan tanggunganmu.</p><p><strong>Coba hari ini:</strong> tentukan target awal dan pisahkan cadangan dari uang belanja harian di tempat yang mudah dicairkan saat dibutuhkan.</p><a class="text-link" href="#kalkulator-darurat">Hitung contoh target dana darurat <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><p class="ref-title">Referensi belajar</p><ul class="ref-list"><li><a href="https://sikapiuangmu.ojk.go.id/FrontEnd/CMS/Download/543" rel="noopener">Majalah Edukasi Konsumen OJK: “Pilih Dana Darurat, Asuransi, atau Investasi?” <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li><li><a href="https://www.kompas.tv/ekonomi/628433/3-tempat-simpan-dana-darurat-yang-aman-menurut-ojk" rel="noopener">Kompas TV: 3 tempat menyimpan dana darurat menurut OJK <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li></ul></div>
+        </details>
+        <details class="lesson" id="reksa-dana">
+          <summary><span><small>03 · Investasi</small><strong>Kenali reksa dana dan risikonya</strong></span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <div class="lesson-body"><p>Reksa dana menghimpun dana dari banyak investor dan dikelola manajer investasi. Isinya bisa berbeda: ada yang berfokus pada instrumen pasar uang, obligasi, atau saham. Nilainya bisa turun dan hasilnya tidak dijamin.</p><p><strong>Sebelum memilih:</strong> baca prospektus dan ringkasan produk. Perhatikan aset yang dipegang, biaya, risiko, dan aturan pencairan. Sesuaikan dengan tujuan dan kapan uangnya dibutuhkan.</p><br><a class="text-link" href="#tvm">Coba simulasi nilai waktu uang <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><p class="ref-title">Referensi belajar</p><ul class="ref-list"><li><a href="https://sikapiuangmu.ojk.go.id/FrontEnd/CMS/Download/330" rel="noopener">Cara Cerdas Berinvestasi di Pasar Modal (OJK) <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li><li><a href="https://www.antaranews.com/berita/5695820/mau-mulai-investasi-ini-perbandingan-reksa-dana-dan-emas-untuk-pemula" rel="noopener">Antara: perbandingan reksa dana dan emas untuk pemula <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li></ul></div>
+        </details>
+        <details class="lesson" id="asuransi">
+          <summary><span><small>04 · Asuransi</small><strong>Kenali perlindungan sebelum membeli polis</strong></span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <div class="lesson-body"><p>Asuransi membantu menanggung risiko tertentu sesuai isi polis. Tentukan dulu risiko yang sulit kamu bayar sendiri, lalu cek perlindungan yang sudah kamu miliki, misalnya JKN atau manfaat dari kantor.</p><p><strong>Sebelum membandingkan:</strong> cek premi, batas manfaat, pengecualian, masa tunggu, porsi biaya yang kamu tanggung sendiri (jika ada), dan cara klaim. Premi yang lebih murah tidak selalu memberi perlindungan yang sama.</p><p><strong>Coba hari ini:</strong> bandingkan dua polis dengan manfaat yang mirip. Minta penjelasan tertulis tentang satu pengecualian atau syarat klaim yang belum kamu pahami.</p><p class="ref-title">Referensi belajar</p><ul class="ref-list"><li><a href="https://sikapiuangmu.ojk.go.id/FrontEnd/CMS/Download/331" rel="noopener">Lindungi Risiko Anda dengan Asuransi (OJK) <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li><li><a href="https://sikapiuangmu.ojk.go.id/FrontEnd/CMS/Download/474" rel="noopener">Seri Literasi Keuangan OJK: Asuransi Jiwa <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li></ul></div>
+        </details>
+        <details class="lesson" id="pensiun">
+          <summary><span><small>05 · Perencanaan pensiun</small><strong>Mulai dari pengeluaran, bukan dari angka besar</strong></span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <div class="lesson-body"><p>Bayangkan pengeluaran rutin saat pensiun: kebutuhan rumah tangga, kesehatan, dan pengeluaran tahunan. Kurangi dengan perkiraan penghasilan rutin yang benar-benar tersedia, misalnya manfaat pensiun bulanan. Selisih inilah yang perlu ditopang dari tabungan atau investasi.</p><p><strong>Coba hari ini:</strong> catat saldo untuk pensiun, cek manfaat dan waktu pencairan dari program yang kamu ikuti, lalu tentukan setoran yang realistis. Pisahkan dana pensiun dari dana darurat. Uji ulang ketika penghasilan, biaya hidup, atau rencana pensiun berubah.</p><a class="text-link" href="#fire">Jajaki target pensiun dengan simulasi FIRE <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><p class="ref-title">Referensi belajar</p><ul class="ref-list"><li><a href="https://sikapiuangmu.ojk.go.id/FrontEnd/CMS/Download/332" rel="noopener">Semua Orang Bisa Punya Pensiun (OJK) <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li><li><a href="https://sikapiuangmu.ojk.go.id/FrontEnd/CMS/Download/334" rel="noopener">Masa Tua Lebih Nyaman dengan Bank (OJK) <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li></ul></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section health-section" id="kesehatan" aria-labelledby="health-title">
+    <div class="wrap">
+      <p class="eyebrow gold-text"><span class="section-number">02</span> Kesehatan bersama Loka</p>
+      <div class="section-heading"><h2 id="health-title">Rawat diri, pelan-pelan.</h2><p>Pilih satu kebiasaan yang terasa paling mungkin untuk kamu coba hari ini.</p></div>
+      <div class="path-grid">
+        <div class="path-visual health-visual">
+          <b class="visual-tag"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg> Catatan Loka</b>
+          <img src="assets/loka-health-running.webp" width="328" height="420" loading="lazy" decoding="async" alt="Loka berlari dengan pakaian olahraga kuning dan biru">
+          <p>“Jalan santai juga hitungannya bergerak!”</p>
+        </div>
+        <div class="lessons">
+          <details class="lesson" id="gerak">
+            <summary><span><small>01 · Aktivitas fisik</small><strong>Jalan santai untuk mulai bergerak</strong></span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="lesson-body"><p>Berjalan kaki, bersepeda, dan menari termasuk aktivitas fisik. Pilih yang kamu sukai dan sesuaikan durasi serta intensitasnya dengan kemampuanmu.</p><p><strong>Coba hari ini:</strong> sisipkan jalan santai singkat setelah makan siang atau jeda bergerak di sela duduk lama.</p><p class="ref-title">Referensi belajar</p><ul class="ref-list"><li><a href="https://yankes.kemkes.go.id/view_artikel/2663/sedentary-behavior-vs-aktifitas-fisik" rel="noopener">Kemenkes: Sedentary behavior vs aktivitas fisik <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li><li><a href="https://yankes.kemkes.go.id/view_artikel/1399/apa-saja-manfaat-melakukan-olahraga" rel="noopener">Kemenkes: Apa saja manfaat melakukan olahraga? <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li></ul></div>
+        </details>
+          <details class="lesson" id="nutrisi">
+            <summary><span><small>02 · Pola makan sehat</small><strong>Atur pola makan tanpa aturan ekstrem</strong></span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="lesson-body"><p>Panduan Isi Piringku membagi satu piring makan: setengahnya untuk sayur dan buah, setengah lainnya untuk makanan pokok dan lauk pauk.</p><p><strong>Coba hari ini:</strong> pakai bahan yang sudah ada, misalnya nasi, tempe, tumis sayur dan pepaya. Ide ini bisa disesuaikan dengan kebutuhan dan ketersediaan bahanmu.</p><ul class="lesson-list"><li>Buat daftar belanja singkat agar sayur, buah, dan lauk mudah tersedia.</li><li>Coba air putih sebagai pilihan minum sehari-hari. Saat membandingkan makanan kemasan, perhatikan ukuran sajian dan kandungan gula, garam, serta lemak pada label.</li><li>Jika punya alergi, kondisi medis, atau kebutuhan khusus, bicarakan perubahan pola makan dengan tenaga kesehatan atau ahli gizi.</li></ul><p class="ref-title">Referensi belajar</p><ul class="ref-list"><li><a href="https://yankes.kemkes.go.id/view_artikel/179/pilar-utama-dalam-prinsip-gizi-seimbang" rel="noopener">Kemenkes: Pilar utama dalam prinsip gizi seimbang <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li><li><a href="https://www.ekahospital.com/better-healths/memahami-panduan-gizi-seimbang-yang-tepat" rel="noopener">Eka Hospital: Memahami panduan gizi seimbang (Isi Piringku) <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li></ul></div>
+        </details>
+          <details class="lesson" id="tidur">
+            <summary><span><small>03 · Rutinitas malam</small><strong>Biasakan jadwal tidur yang lebih teratur</strong></span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="lesson-body"><p>Coba gunakan jam tidur dan bangun yang konsisten. Siapkan rutinitas malam yang tenang dan hindari konsumsi kafein dekat waktu tidur. Jika gangguan tidur menetap atau mengganggu aktivitas, konsultasikan ke tenaga kesehatan.</p><p class="ref-title">Referensi belajar</p><ul class="ref-list"><li><a href="https://yankes.kemkes.go.id/view_artikel/2661/kesulitan-tidur-cobalah-terapkan-sleep-hygiene" rel="noopener">Kemenkes: Kesulitan tidur? Terapkan sleep hygiene <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li><li><a href="https://www.gooddoctor.co.id/hidup-sehat/info-sehat/praktikkan-sleep-hygiene-berikut-ini-untuk-atasi-kesulitan-tidur-yang-kamu-alami/" rel="noopener">Good Doctor: praktik sleep hygiene untuk atasi sulit tidur <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li></ul></div>
+        </details>
+          <details class="lesson" id="kesehatan-mental">
+            <summary><span><small>04 · Kesehatan mental</small><strong>Ambil jeda dan rawat pikiranmu</strong></span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="lesson-body"><p>Kesehatan mental memengaruhi cara kita berpikir, merasa, dan menjalani hari. Saat sedang tertekan, coba berhenti sejenak: rasakan telapak kaki menyentuh lantai, lalu perhatikan suara dan benda di sekitarmu. Latihan ini membantu mengarahkan perhatian kembali ke saat ini.</p><p><strong>Setelah jeda:</strong> tulis apa yang sedang membebanimu dan pilih satu hal yang bisa kamu lakukan hari ini, misalnya membagi tugas menjadi langkah kecil atau menghubungi orang yang kamu percaya.</p><p>Bila rasa tertekan, cemas, atau sedih menetap atau mengganggu kegiatan sehari-hari, pertimbangkan mencari bantuan tenaga kesehatan. Latihan mandiri bukan pengganti bantuan profesional. Jika butuh bantuan layanan kesehatan jiwa segera, Kemenkes menyebutkan pusat bantuan 119 yang aktif 24 jam.</p><p class="ref-title">Referensi belajar</p><ul class="ref-list"><li><a href="https://yankes.kemkes.go.id/view_artikel/2031/menjaga-kesehatan-mental-di-lingkungan-kerja" rel="noopener">Kemenkes: Menjaga kesehatan mental dan mengelola stres <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li><li><a href="https://www.alodokter.com/tidak-hanya-sehat-badan-kesehatan-mental-juga-penting-dijaga" rel="noopener">Alodokter: 7 cara menjaga kesehatan mental <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></li></ul></div>
+        </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="simulasi" aria-labelledby="sim-title">
+    <p class="eyebrow blue-text"><span class="section-number">03</span> Alat belajar bersama Pelita</p>
+    <div class="section-heading"><h2 id="sim-title">Coba hitung skenariomu.</h2><p>Tiga kalkulator untuk memahami cara kerja cadangan, investasi, dan target pensiun. Semua perhitungan berjalan di perangkatmu.</p></div>
+    <nav class="tool-jump" aria-label="Pilih kalkulator"><a href="#kalkulator-darurat">01 · Dana darurat</a><a href="#tvm">02 · Nilai waktu uang</a><a href="#fire">03 · Pensiun FIRE</a></nav>
+    <div class="calculator" id="kalkulator-darurat">
+      <div class="calc-copy"><p class="eyebrow"><span class="kicker-dot"></span> Alat belajar</p><h3>Berapa target dana daruratmu?</h3><p>Pilih statusmu, lalu kalikan pengeluaran pokok bulanan dengan jumlah bulan cadangan: 3–6 bulan untuk lajang, 6–12 bulan untuk menikah. Angka ini hanya simulasi, bukan patokan wajib.</p><img src="assets/prop-piggy-bank.webp" width="220" height="219" loading="lazy" alt=""></div>
+      <div class="calc-panel">
+        <form id="calc-form" hidden>
+          <label for="biaya">Pengeluaran pokok per bulan</label>
+          <div class="money-input"><span aria-hidden="true">Rp</span><input id="biaya" name="biaya" type="text" inputmode="numeric" maxlength="15" placeholder="Contoh: 3.000.000" aria-describedby="petunjuk" required></div>
+          <small class="field-hint" id="petunjuk">Gunakan angka bulat, boleh pakai titik ribuan.</small>
+          <label for="status">Status</label>
+          <select id="status" name="status"><option value="lajang" selected>Lajang (cadangan 3–6 bulan)</option><option value="menikah">Menikah (cadangan 6–12 bulan)</option></select>
+          <button class="btn primary calc-button" type="submit">Hitung Target <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <p id="calc-result" class="calc-result" role="status" aria-atomic="true">Hasil simulasimu akan muncul di sini.</p>
+          <small class="field-hint">Angka yang kamu masukkan tidak disimpan atau dikirim.</small>
+        </form>
+        <noscript><p>Untuk memakai kalkulator, aktifkan JavaScript. Kamu juga bisa menghitung manual: Rp3.000.000 × 3 bulan = Rp9.000.000 sampai Rp3.000.000 × 6 bulan = Rp18.000.000 (lajang).</p></noscript>
+      </div>
+    </div>
+    <article class="tool-card" id="tvm" aria-labelledby="tvm-title">
+      <div class="tool-intro">
+        <p class="eyebrow blue-text"><span class="section-number">02</span> Investasi</p>
+        <h3 id="tvm-title">Nilai waktu uang</h3>
+        <p>Bandingkan nilai uang sekarang dan di masa depan dengan asumsi imbal hasil tetap. Untuk nilai akhir, kamu juga bisa menyimulasikan setoran bulanan.</p>
+        <details class="tool-notes"><summary>Cara hitung dan batasan</summary><p>Imbal hasil efektif tahunan <var>r</var> diubah menjadi imbal hasil bulanan: <code>(1 + r)^(1/12) − 1</code>. Untuk nilai akhir, setoran masuk setiap akhir bulan. Untuk nilai sekarang, target didiskontokan tanpa setoran tambahan: <code>target ÷ (1 + r)^tahun</code>.</p><p>Hasil dalam rupiah nominal, belum memperhitungkan inflasi, pajak, atau biaya. Imbal hasil nyata dapat berubah dan tidak dijamin.</p></details>
+      </div>
+      <div class="tool-main">
+        <form id="tvm-form" class="tool-form" hidden novalidate>
+          <div class="tool-fields">
+            <div class="tool-field field-wide"><label for="tvm-mode">Apa yang ingin dihitung?</label><select id="tvm-mode" name="mode"><option value="fv">Nilai akhir investasi (FV)</option><option value="pv">Modal yang dibutuhkan sekarang (PV)</option></select></div>
+            <div class="tool-field" id="tvm-start-row"><label for="tvm-start">Modal awal (Rp)</label><input type="text" id="tvm-start" name="start" inputmode="numeric" maxlength="15" value="10.000.000" required></div>
+            <div class="tool-field" id="tvm-monthly-row"><label for="tvm-monthly">Setoran per bulan (Rp)</label><input type="text" id="tvm-monthly" name="monthly" inputmode="numeric" maxlength="15" value="500.000" required></div>
+            <div class="tool-field field-wide" id="tvm-target-row" hidden><label for="tvm-target">Target di akhir periode (Rp)</label><input type="text" id="tvm-target" name="target" inputmode="numeric" maxlength="15" value="100.000.000" required disabled></div>
+            <div class="tool-field"><label for="tvm-years">Jangka waktu (tahun)</label><input type="text" id="tvm-years" name="years" inputmode="numeric" maxlength="2" value="10" required></div>
+            <div class="tool-field"><label for="tvm-return">Imbal hasil efektif per tahun (%)</label><input type="text" id="tvm-return" name="rate" inputmode="decimal" maxlength="8" value="5" required></div>
+          </div>
+          <p class="field-hint">Angka awal hanya contoh. Gunakan koma untuk desimal persen (misalnya 5,5). Untuk skenario rugi, masukkan angka negatif.</p>
+          <button class="btn primary" type="submit">Hitung Nilai Uang <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <div id="tvm-result" class="tool-result" role="status" aria-atomic="true">Hasil nilai waktu uang akan muncul di sini.</div>
+        </form>
+        <noscript><p>Aktifkan JavaScript untuk menghitung. Contoh tanpa setoran rutin: Rp10.000.000 dengan asumsi 5% selama 2 tahun menjadi Rp11.025.000 sebelum biaya dan pajak.</p></noscript>
+      </div>
+    </article>
+    <article class="tool-card tool-fire" id="fire" aria-labelledby="fire-title">
+      <div class="tool-intro">
+        <p class="eyebrow gold-text"><span class="section-number">03</span> Perencanaan pensiun</p>
+        <h3 id="fire-title">Rencanakan target FIRE</h3>
+        <p>FIRE (<i>Financial Independence, Retire Early</i>) adalah pendekatan untuk mengukur kemandirian finansial. Simulasikan berapa dana yang dibutuhkan untuk menutup pengeluaran yang tidak ditopang pendapatan lain.</p>
+        <details class="tool-notes"><summary>Cara hitung dan batasan</summary><p><strong>Target FIRE</strong> = kebutuhan bersih tahunan ÷ tingkat penarikan awal (%). Contoh: Rp60 juta ÷ 4% = Rp1,5 miliar. Angka 4% hanya contoh, bukan tingkat penarikan yang aman atau dijamin, terutama untuk masa pensiun panjang.</p><p>Perkiraan waktu memakai pertumbuhan riil konstan dan setoran di akhir bulan dengan daya beli tetap. Pakai estimasi pengeluaran dan pendapatan dalam rupiah hari ini. Masukkan perkiraan pajak dan biaya dalam anggaran atau sesuaikan asumsi imbal hasil. Model tidak menguji turunnya pasar di awal pensiun atau berapa lama dana bertahan.</p></details>
+      </div>
+      <div class="tool-main">
+        <form id="fire-form" class="tool-form" hidden novalidate>
+          <div class="tool-fields">
+            <div class="tool-field"><label for="fire-expenses">Pengeluaran per bulan saat pensiun (Rp)</label><input type="text" id="fire-expenses" name="expenses" inputmode="numeric" maxlength="15" value="6.000.000" required></div>
+            <div class="tool-field"><label for="fire-income">Pendapatan rutin lain saat pensiun (Rp/bulan)</label><input type="text" id="fire-income" name="income" inputmode="numeric" maxlength="15" value="1.000.000" required></div>
+            <div class="tool-field"><label for="fire-assets">Aset yang sudah disiapkan (Rp)</label><input type="text" id="fire-assets" name="assets" inputmode="numeric" maxlength="15" value="100.000.000" required></div>
+            <div class="tool-field"><label for="fire-monthly">Setoran investasi per bulan (Rp)</label><input type="text" id="fire-monthly" name="monthly" inputmode="numeric" maxlength="15" value="3.000.000" required></div>
+            <div class="tool-field"><label for="fire-draw">Penarikan awal per tahun (%)</label><input type="text" id="fire-draw" name="draw" inputmode="decimal" maxlength="6" value="4" required></div>
+            <div class="tool-field"><label for="fire-return">Imbal hasil riil per tahun (%)</label><input type="text" id="fire-return" name="rate" inputmode="decimal" maxlength="8" value="3" aria-describedby="fire-hint" required></div>
+          </div>
+          <p class="field-hint" id="fire-hint">Semua angka awal hanya contoh. Imbal hasil riil berarti pertumbuhan setelah memperhitungkan inflasi. Masukkan 0 jika tidak ada pendapatan lain, aset, atau setoran.</p>
+          <button class="btn primary" type="submit">Hitung Target FIRE <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <div id="fire-result" class="tool-result" role="status" aria-atomic="true">Target dan perkiraan waktu akan muncul di sini.</div>
+        </form>
+        <noscript><p>Aktifkan JavaScript untuk menghitung. Rumus manual: (pengeluaran bulanan − pendapatan rutin lain per bulan) × 12 ÷ tingkat penarikan dalam desimal. Jika pendapatan menutup pengeluaran, kebutuhan dari portofolio adalah Rp0 dalam skenario ini.</p></noscript>
+      </div>
+    </article>
+  </section>
+
+  <section class="section health-calc-section" id="kalkulator-kesehatan" aria-labelledby="hcalc-title">
+    <div class="wrap">
+      <p class="eyebrow gold-text"><span class="section-number">04</span> Alat belajar bersama Loka</p>
+      <div class="section-heading"><h2 id="hcalc-title">Kenali kebutuhan tubuhmu.</h2><p>Dua kalkulator sederhana untuk gambaran awal. Perhitungan berjalan di perangkatmu dan tidak disimpan.</p></div>
+      <nav class="tool-jump" aria-label="Pilih kalkulator kesehatan"><a href="#bmi">01 · Indeks massa tubuh</a><a href="#air">02 · Kebutuhan air minum</a></nav>
+      <article class="tool-card tool-fire" id="bmi" aria-labelledby="bmi-title">
+        <div class="tool-intro">
+          <p class="eyebrow gold-text"><span class="section-number">01</span> Berat badan</p>
+          <h3 id="bmi-title">Kalkulator Body Mass Index (BMI)</h3>
+          <p>BMI membandingkan berat badan dengan tinggi badan sebagai gambaran awal status berat badan orang dewasa.</p>
+          <details class="tool-notes"><summary>Cara hitung dan batasan</summary><p><code>BMI = berat (kg) ÷ tinggi (m)²</code>. Kategori memakai batas yang umum dipakai di Indonesia: di bawah 18,5 kurang, 18,5–24,9 normal, 25–26,9 berat badan lebih, dan 27 ke atas obesitas.</p><p>BMI tidak membedakan lemak dan otot, serta tidak berlaku untuk anak, ibu hamil, dan atlet. Untuk penilaian kesehatan, bicarakan dengan tenaga kesehatan.</p></details>
+        </div>
+        <div class="tool-main">
+          <form id="bmi-form" class="tool-form" hidden novalidate>
+            <div class="tool-fields">
+              <div class="tool-field"><label for="bmi-height">Tinggi badan (cm)</label><input type="text" id="bmi-height" name="height" inputmode="decimal" maxlength="6" placeholder="Contoh: 165" required></div>
+              <div class="tool-field"><label for="bmi-weight">Berat badan (kg)</label><input type="text" id="bmi-weight" name="weight" inputmode="decimal" maxlength="6" placeholder="Contoh: 60" required></div>
+            </div>
+            <p class="field-hint">Gunakan koma untuk desimal (misalnya 60,5). Untuk usia 18 tahun ke atas.</p>
+            <button class="btn primary" type="submit">Hitung BMI <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <div id="bmi-result" class="tool-result" role="status" aria-atomic="true">Hasil BMI akan muncul di sini.</div>
+          </form>
+          <noscript><p>Aktifkan JavaScript untuk menghitung. Contoh: 60 kg ÷ (1,65 × 1,65) = BMI 22,0.</p></noscript>
+        </div>
+      </article>
+      <article class="tool-card tool-fire" id="air" aria-labelledby="air-title">
+        <div class="tool-intro">
+          <p class="eyebrow gold-text"><span class="section-number">02</span> Hidrasi</p>
+          <h3 id="air-title">Kebutuhan air putih harian</h3>
+          <p>Perkirakan kebutuhan minum per hari dari berat badan dan tingkat aktivitasmu.</p>
+          <details class="tool-notes"><summary>Cara hitung dan batasan</summary><p>Perkiraan sederhana: berat badan × 30 ml (aktivitas ringan), 35 ml (sedang), atau 40 ml (aktif). Kebutuhan nyata dipengaruhi cuaca, keringat, makanan, dan kondisi tubuh.</p><p>Jika punya penyakit ginjal atau jantung, sedang hamil atau menyusui, ikuti anjuran tenaga kesehatan.</p></details>
+        </div>
+        <div class="tool-main">
+          <form id="water-form" class="tool-form" hidden novalidate>
+            <div class="tool-fields">
+              <div class="tool-field"><label for="water-weight">Berat badan (kg)</label><input type="text" id="water-weight" name="weight" inputmode="decimal" maxlength="6" placeholder="Contoh: 60" required></div>
+              <div class="tool-field"><label for="water-level">Aktivitas harian</label><select id="water-level" name="level"><option value="30">Ringan (banyak duduk)</option><option value="35" selected>Sedang (olahraga 1–3 kali per minggu)</option><option value="40">Aktif (olahraga 4+ kali per minggu atau kerja fisik)</option></select></div>
+            </div>
+            <p class="field-hint">Hasilnya perkiraan kasar, bukan anjuran medis.</p>
+            <button class="btn primary" type="submit">Hitung Kebutuhan Air <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <div id="water-result" class="tool-result" role="status" aria-atomic="true">Hasil perkiraan akan muncul di sini.</div>
+          </form>
+          <noscript><p>Aktifkan JavaScript untuk menghitung. Contoh: 60 kg × 35 ml = 2.100 ml per hari.</p></noscript>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section quiz-section" id="kuis" aria-labelledby="quiz-title">
+    <div class="wrap quiz-layout">
+      <div class="quiz-intro">
+        <p class="eyebrow blue-text"><span class="section-number">05</span> Kuis bersama Pelita</p>
+        <h2 id="quiz-title">Seberapa paham kamu soal uang?</h2>
+        <p>Jawab 10 pertanyaan tentang anggaran, dana darurat, investasi, asuransi, dan pensiun. Setiap jawaban mendapat penjelasan singkat, jadi kamu bisa belajar dari yang masih keliru.</p>
+        <img src="assets/pelita-reading.webp" width="141" height="220" loading="lazy" alt="">
+      </div>
+      <div class="quiz-card">
+        <div id="quiz-app" hidden>
+          <div class="quiz-top"><span id="quiz-count">Pertanyaan 1 dari 10</span><progress id="quiz-progress" value="0" max="10" aria-label="Jumlah pertanyaan yang sudah dijawab"></progress></div>
+          <form id="quiz-form" novalidate>
+            <fieldset class="quiz-fieldset" id="quiz-fieldset"><legend class="quiz-question" id="quiz-question" tabindex="-1"></legend><div id="quiz-choices" class="quiz-choices"></div></fieldset>
+            <p id="quiz-feedback" class="quiz-feedback" role="status" aria-atomic="true"></p>
+            <div class="quiz-actions"><button class="btn primary" type="submit" id="quiz-check">Periksa Jawaban</button><button class="btn primary" type="button" id="quiz-next" hidden>Soal Berikutnya <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+          </form>
+          <div class="quiz-end" id="quiz-end" hidden>
+            <h3 id="quiz-score" tabindex="-1"></h3><p>Kamu bisa mengulang atau melihat ringkasan jawaban di bawah ini.</p>
+            <details class="tool-notes"><summary>Lihat ringkasan jawaban</summary><ol class="quiz-review" id="quiz-review"></ol></details>
+            <button class="btn primary" id="quiz-restart" type="button">Ulangi Kuis</button>
+          </div>
+        </div>
+        <noscript><p>Aktifkan JavaScript untuk mengerjakan kuis.</p></noscript>
+      </div>
+    </div>
+  </section>
+  <section class="section quiz-section quiz-health" id="kuis-kesehatan" aria-labelledby="hquiz-title">
+    <div class="wrap quiz-layout">
+      <div class="quiz-intro">
+        <p class="eyebrow gold-text"><span class="section-number">06</span> Kuis bersama Loka</p>
+        <h2 id="hquiz-title">Seberapa paham kamu soal kesehatan?</h2>
+        <p>Jawab 10 pertanyaan tentang aktivitas fisik, pola makan, tidur, hidrasi, dan kesehatan mental. Setiap jawaban disertai penjelasan singkat.</p>
+        <img src="assets/loka-health.webp" width="224" height="420" loading="lazy" alt="">
+      </div>
+      <div class="quiz-card">
+        <div id="hquiz-app" hidden>
+          <div class="quiz-top"><span id="hquiz-count">Pertanyaan 1 dari 10</span><progress id="hquiz-progress" value="0" max="10" aria-label="Jumlah pertanyaan yang sudah dijawab"></progress></div>
+          <form id="hquiz-form" novalidate>
+            <fieldset class="quiz-fieldset" id="hquiz-fieldset"><legend class="quiz-question" id="hquiz-question" tabindex="-1"></legend><div id="hquiz-choices" class="quiz-choices"></div></fieldset>
+            <p id="hquiz-feedback" class="quiz-feedback" role="status" aria-atomic="true"></p>
+            <div class="quiz-actions"><button class="btn primary" type="submit" id="hquiz-check">Periksa Jawaban</button><button class="btn primary" type="button" id="hquiz-next" hidden>Soal Berikutnya <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+          </form>
+          <div class="quiz-end" id="hquiz-end" hidden>
+            <h3 id="hquiz-score" tabindex="-1"></h3><p>Kamu bisa mengulang atau melihat ringkasan jawaban di bawah ini.</p>
+            <details class="tool-notes"><summary>Lihat ringkasan jawaban</summary><ol class="quiz-review" id="hquiz-review"></ol></details>
+            <button class="btn primary" id="hquiz-restart" type="button">Ulangi Kuis</button>
+          </div>
+        </div>
+        <noscript><p>Aktifkan JavaScript untuk mengerjakan kuis.</p></noscript>
+      </div>
+    </div>
+  </section>
+
+  <section class="section checklist-section" id="mitra" aria-labelledby="cek-title">
+    <div class="wrap">
+      <p class="eyebrow blue-text"><span class="kicker-dot"></span> Panduan memilih</p>
+      <div class="section-heading"><h2 id="cek-title">Cek sebelum memilih.</h2><p>Gunakan pertanyaan ini untuk menimbang produk atau jasa. Ini bukan penawaran atau rekomendasi merek.</p></div>
+      <div class="check-grid">
+        <article class="check-card blue-card"><img src="assets/prop-piggy-bank.webp" width="220" height="219" loading="lazy" alt=""><h3>Emas digital</h3><p>Berapa selisih harga beli dan jual? Cek biaya transaksi dan syarat pencairan atau penarikan fisik.</p><p>Harga emas bisa naik dan turun, serta tidak memberi bunga atau dividen. Pastikan penyedianya jelas dan berizin, siapa yang menyimpan emasnya, dan apa bukti kepemilikanmu. Tentukan juga tujuan dan jangka waktunya sebelum membeli.</p></article>
+        <article class="check-card yellow-card"><span class="tile-icon yellow"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></span><h3>Asuransi kesehatan, sakit kritis, dan jiwa</h3><p>Apa yang dilindungi? Asuransi kesehatan menanggung biaya perawatan, sakit kritis memberi santunan saat didiagnosis penyakit tertentu, dan jiwa memberi uang pertanggungan bagi ahli waris. Baca manfaat, pengecualian, masa tunggu, dan cara klaim pada polis.</p></article>
+        <article class="check-card"><img src="assets/prop-calculator.webp" width="193" height="220" loading="lazy" alt=""><h3>Perencana keuangan</h3><p>Apa ruang lingkup jasanya? Tanyakan kualifikasi, biaya, dan apakah ada komisi dari produk yang ditawarkan.</p></article>
+      </div>
+      <div class="consult-head"><h3>Butuh teman berdiskusi?</h3><p>Bicarakan kondisimu langsung dengan tenaga yang tepat sebelum mengambil keputusan penting.</p></div>
+      <div class="check-grid two">
+        <article class="check-card blue-card"><span class="tile-icon blue"><svg class="icon" aria-hidden="true"><use href="#i-wallet"/></svg></span><h3>Konsultasi dengan perencana keuangan</h3><p>Ingin membahas anggaran, dana darurat, proteksi, investasi, atau rencana pensiun? Diskusikan kondisi keuanganmu bersama perencana keuangan bersertifikat CFP®.</p><a class="text-link" href="https://rencanabijak.com/cfp/bangunsetiaputra-cfp">Atur jadwal konsultasi <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></article>
+        <article class="check-card yellow-card"><span class="tile-icon yellow"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></span><h3>Konsultasi dengan praktisi kesehatan</h3><p>Punya pertanyaan tentang pola makan, aktivitas fisik, tidur, atau kesehatan mental? Bicarakan dengan praktisi kesehatan agar sesuai dengan kondisimu.</p><!-- ISI TAUTAN: ganti <span class="text-link is-pending"> di bawah dengan <a class="text-link" href="TAUTAN-ANDA"> ... </a> -->
+          <span class="text-link is-pending" aria-disabled="true">Atur jadwal konsultasi · tautan segera tersedia</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="tentang" aria-labelledby="about-title">
+    <p class="eyebrow blue-text"><span class="kicker-dot"></span> Kenali teman belajarmu</p>
+    <div class="section-heading"><h2 id="about-title">Dua cara menemani kamu.</h2><p>Loka mengajakmu mulai. Pelita membantu mengurai hal rumit, langkah demi langkah.</p></div>
+    <div class="about-grid">
+      <article class="about-card yellow-card"><img src="assets/loka-health.webp" width="224" height="420" loading="lazy" alt=""><div><h3>Loka</h3><p>Ceria dan ekspresif. Temanmu mencoba kebiasaan sehat dengan cara yang menyenangkan.</p></div></article>
+      <article class="about-card blue-card"><img src="assets/pelita-reading.webp" width="141" height="220" loading="lazy" alt=""><div><h3>Pelita</h3><p>Tenang, hangat, dan jelas. Temanmu memahami uang tanpa istilah yang berbelit.</p></div></article>
+    </div>
+  </section>
+</main>
+<footer class="footer" id="kontak">
+  <div class="wrap footer-grid">
+    <div><a class="brand" href="#beranda"><img class="brand-logo" src="assets/logo.webp" width="58" height="57" alt=""><span>Loka<span class="brand-blue">Pelita</span></span></a><p>Belajar uang, rawat diri.<br>Langkah kecil tiap hari.</p></div>
+    <div><h2>Ikuti LokaPelita di Instagram</h2><a href="https://www.instagram.com/lokapelitafinancial/"><svg class="icon" aria-hidden="true"><use href="#i-insta"/></svg> @lokapelitafinancial <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a><a href="https://www.instagram.com/lokapelitahealth/"><svg class="icon" aria-hidden="true"><use href="#i-insta"/></svg> @lokapelitahealth <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></div>
+    <div><h2>Catatan edukasi</h2><p>Materi ini bersifat umum. Bukan nasihat keuangan pribadi, diagnosis, atau pengganti konsultasi dengan tenaga kesehatan.</p></div>
+  </div>
+  <div class="wrap footer-bottom"><span>© 2026 LokaPelita</span><a href="#tentang">Kenali Kami</a><a href="#beranda">Kembali ke atas ↑</a></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,28 @@
+LOKAPELITA — DRAF PORTAL EDUKASI · VERSI 2
+
+Cara membuka di Windows
+1. Klik kanan arsip ZIP, pilih “Ekstrak Semua…” (Extract All).
+2. Buka folder lokapelita, lalu klik dua kali index.html.
+3. Gulir untuk membaca panduan. Buka judul panduan untuk melihat isinya.
+   Pilih kalkulator dana darurat (status lajang/menikah), nilai waktu uang (FV/PV), atau pensiun FIRE.
+   Buka menu Kuis Finansial untuk menjawab 10 soal dan melihat pembahasannya.
+
+Tidak perlu instalasi, server, atau koneksi internet untuk membaca materi
+lokal dan memakai kalkulator atau kuis. Tautan referensi, jadwal konsultasi, dan
+Instagram memerlukan internet.
+Draf ini belum dipublikasikan. Masukan simulasi dan jawaban kuis tidak dikirim atau disimpan oleh situs.
+
+Cara mengedit
+- index.html: teks, bagian halaman, sumber rujukan, dan tautan.
+- assets/style.css: warna, tipografi, tampilan ponsel dan desktop.
+- assets/app.js: menu ponsel dan kalkulator dana darurat.
+- assets/tools.js: kalkulator nilai waktu uang, FIRE, BMI, kebutuhan air, dan soal kedua kuis.
+- assets/*.webp: gambar asli dari paket Loka & Pelita, dioptimalkan untuk web.
+  Ilustrasi berasal dari paket karakter lengkap, karakter Health, dan olahraga Health.
+- assets/logo.webp dan favicon.png: logo LokaPelita (Loka & Pelita Sahabat Ceria Belajar).
+- assets/manrope-latin.woff2: font lokal Manrope; lisensi di assets/manrope-ofl.txt.
+
+Catatan isi
+Bagian mitra pada draf awal diganti dengan panduan memilih produk/jasa.
+Klaim pengawasan, penawaran produk, dan rincian kontak yang belum terverifikasi
+sengaja tidak ditampilkan. Materi finansial dan kesehatan ini bersifat edukasi umum.
