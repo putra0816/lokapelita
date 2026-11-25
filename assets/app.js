@@ -70,7 +70,15 @@ form.addEventListener('submit', (event) => {
   label.textContent = `Target dana darurat ${married ? 'menikah' : 'lajang'} (${low}–${high} bulan)`;
   const value = document.createElement('strong');
   value.textContent = total;
-  result.replaceChildren(label, value);
+  const cta = document.createElement('a');
+  cta.className = 'text-link result-cta';
+  cta.href = '#mitra';
+  cta.textContent = 'Target terasa besar? Diskusikan strategi bertahap lewat konsultasi keuangan';
+  const note = document.createElement('p'); note.className = 'coach';
+  const ph = document.createElement('img'); ph.src = 'assets/pelita-teaching.webp'; ph.alt = ''; ph.width = 40; ph.height = 40;
+  const pt = document.createElement('span'); pt.textContent = 'Pelita: Belum terkumpul? Mulai dengan menyisihkan 10% penghasilan di awal bulan.';
+  note.append(ph, pt);
+  result.replaceChildren(label, value, cta, note);
   result.classList.remove('error');
   result.classList.add('calculated');
   amount.removeAttribute('aria-invalid');

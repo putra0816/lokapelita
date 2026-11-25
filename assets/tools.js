@@ -38,6 +38,14 @@
     return data;
   }
 
+  function coach(el, who, mood, text) {
+    el.querySelectorAll('.coach').forEach((n) => n.remove());
+    const box = document.createElement('p'); box.className = 'coach';
+    const img = document.createElement('img'); img.alt = ''; img.width = 40; img.height = 40;
+    img.src = `assets/${who === 'Loka' ? (mood === 'happy' ? 'loka-happy' : 'loka-health') : (mood === 'happy' ? 'pelita-teaching' : 'pelita-reading')}.webp`;
+    const span = document.createElement('span'); span.textContent = `${who}: ${text}`;
+    box.append(img, span); el.append(box);
+  }
   function show(output, label, value, notes) {
     const heading = document.createElement('span');
     const number = document.createElement('strong');
@@ -48,6 +56,16 @@
       row.textContent = note;
       return row;
     }));
+    const cta = document.createElement('a');
+    cta.className = 'text-link result-cta';
+    cta.href = '#mitra';
+    cta.textContent = /^(tvm|fire)/.test(output.id) ? 'Ingin membahas hasil ini? Atur jadwal konsultasi keuangan' : 'Ingin membahas hasilmu? Konsultasi dengan praktisi kesehatan';
+    output.append(cta);
+    const id = output.id;
+    if (id === 'bmi-result') { const ok = /Normal/.test(label); coach(output, 'Loka', ok ? 'happy' : 'calm', ok ? 'Kerja bagus! Pertahankan pola makan dan geraknya.' : 'BMI hanya gambaran awal. Pelan-pelan saja, dan boleh konsultasi dulu.'); }
+    else if (id === 'water-result') coach(output, 'Loka', 'happy', 'Mulai dari satu gelas setelah bangun tidur, ya!');
+    else if (id === 'tvm-result') coach(output, 'Pelita', 'happy', 'Waktu dan konsistensi sering lebih berpengaruh daripada angka awal.');
+    else if (id === 'fire-result') coach(output, 'Pelita', 'calm', 'Angka ini gambaran. Uji ulang saat penghasilan atau biaya hidupmu berubah.');
   }
 
   const tvm = $('tvm-form');
@@ -184,7 +202,8 @@
       explain: 'Berjalan kaki, bersepeda, atau menari termasuk aktivitas fisik. Pilih yang kamu sukai dan lakukan rutin.' },
   ];
 
-  function makeQuiz(p, items) {
+  function makeQuiz(p, items, who) {
+    let lastScore = 0;
     const quizForm = $(`${p}-form`);
     const fieldset = $(`${p}-fieldset`);
     const question = $(`${p}-question`);
@@ -259,7 +278,11 @@
       quizForm.hidden = true;
       end.hidden = false;
       count.textContent = 'Kuis selesai';
-      score.textContent = `${answers.filter((answer, i) => answer === items[i].answer).length} dari ${items.length} benar`;
+      lastScore = answers.filter((answer, i) => answer === items[i].answer).length;
+      score.textContent = `${lastScore} dari ${items.length} benar`;
+      const good = lastScore / items.length >= 0.7;
+      coach(score.parentElement, who.name, good ? 'happy' : 'calm', good ? 'Hebat, kamu sudah paham dasarnya!' : 'Tidak apa-apa, lihat ringkasan jawaban lalu coba lagi.');
+      $(`${p}-konsul`).href += encodeURIComponent(` Skor kuis saya ${lastScore}/${items.length}.`);
       review.closest('details').open = false;
       review.replaceChildren(...items.map((item, i) => {
         const li = document.createElement('li');
@@ -273,12 +296,34 @@
       score.focus();
     });
     $(`${p}-restart`).addEventListener('click', () => { index = 0; answers = []; renderQuestion(); });
+    const nick = () => { const r = lastScore / items.length; return r >= 0.9 ? 'Jagoan' : r >= 0.7 ? 'Sudah Paham' : r >= 0.4 ? 'Terus Belajar' : 'Pemanasan Dulu'; };
+    const msg = () => `Aku baru ikut kuis ${who.topic} bareng ${who.name} di LokaPelita dan dapat ${lastScore}/${items.length}! Coba cek punyamu: https://lokapelita.vercel.app/#${who.hash}`;
+    $(`${p}-wa`).addEventListener('click', () => window.open(`https://wa.me/?text=${encodeURIComponent(msg())}`, '_blank', 'noopener'));
+    $(`${p}-share`).addEventListener('click', async (e) => {
+      if (navigator.share) { try { await navigator.share({ title: 'LokaPelita', text: msg() }); } catch (err) { /* dibatalkan */ } return; }
+      try { await navigator.clipboard.writeText(msg()); e.target.textContent = 'Teks disalin'; } catch (err) { e.target.textContent = 'Gagal menyalin'; }
+    });
+    $(`${p}-card`).addEventListener('click', async () => {
+      const c = document.createElement('canvas'); c.width = 1080; c.height = 1920;
+      const g = c.getContext('2d'); const grad = g.createLinearGradient(0, 0, 0, 1920);
+      grad.addColorStop(0, who.color); grad.addColorStop(1, '#fcfaf4'); g.fillStyle = grad; g.fillRect(0, 0, 1080, 1920);
+      g.fillStyle = '#fff'; g.beginPath(); g.roundRect(80, 300, 920, 1320, 48); g.fill();
+      const logo = new Image(); logo.src = 'assets/logo.webp';
+      try { await logo.decode(); g.drawImage(logo, 340, 340, 400, 391); } catch (err) { /* tanpa logo */ }
+      g.textAlign = 'center'; g.fillStyle = '#14234f';
+      g.font = '800 54px Manrope, system-ui, sans-serif'; g.fillText(`Kuis bersama ${who.name}`, 540, 850);
+      g.font = '800 260px Manrope, system-ui, sans-serif'; g.fillText(`${lastScore}/${items.length}`, 540, 1130);
+      g.fillStyle = who.accent; g.font = '800 76px Manrope, system-ui, sans-serif'; g.fillText(nick(), 540, 1270);
+      g.fillStyle = '#43506a'; g.font = '600 44px Manrope, system-ui, sans-serif'; g.fillText('Coba cek skormu di', 540, 1440);
+      g.fillStyle = '#14234f'; g.font = '800 52px Manrope, system-ui, sans-serif'; g.fillText('lokapelita.vercel.app', 540, 1510);
+      c.toBlob((b) => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = `skor-${p}.png`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000); }, 'image/png');
+    });
     $(`${p}-app`).hidden = false;
     renderQuestion(false);
   }
 
-  makeQuiz('quiz', financeItems);
-  makeQuiz('hquiz', healthItems);
+  makeQuiz('quiz', financeItems, { name: 'Pelita', topic: 'literasi keuangan', hash: 'kuis', color: '#cfe0ff', accent: '#1d4ed8' });
+  makeQuiz('hquiz', healthItems, { name: 'Loka', topic: 'kesehatan', hash: 'kuis-kesehatan', color: '#ffe3a3', accent: '#8a5a00' });
 
   const bmi = $('bmi-form');
   const bmiResult = $('bmi-result');
@@ -322,4 +367,36 @@
       'Tambah saat cuaca panas atau banyak berkeringat. Ikuti anjuran dokter jika punya kondisi medis tertentu.',
     ]);
   });
+
+  const as = $('as-form');
+  if (as) {
+    as.hidden = false;
+    const personas = {
+      both: ['Si Seimbang Tangguh', 'Uang dan kebiasaan sehatmu sudah berjalan beriringan. Pertahankan, lalu uji ulang tiap beberapa bulan.', '#finansial'],
+      fin: ['Si Perencana Tangguh tapi Kurang Rawat Diri', 'Keuanganmu sudah terarah. Sekarang beri ruang untuk gerak, tidur, dan makan seimbang.', '#kesehatan'],
+      hel: ['Si Bugar yang Butuh Jaring Pengaman', 'Kebiasaan sehatmu bagus. Lengkapi dengan anggaran, dana darurat, dan cek perlindungan.', '#finansial'],
+      none: ['Si Pemula Penuh Potensi', 'Semua orang mulai dari nol. Pilih satu langkah kecil dari uang atau kesehatan untuk minggu ini.', '#finansial'],
+    };
+    as.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const v = (i) => as.querySelector(`input[name=as${i}]:checked`);
+      const all = [0, 1, 2, 3, 4, 5].map(v);
+      const err = $('as-error');
+      if (all.includes(null)) { err.textContent = 'Jawab keenam pertanyaan dulu, ya.'; return; }
+      err.textContent = '';
+      const sum = (a) => a.reduce((n, x) => n + Number(x.value), 0);
+      const f = sum(all.slice(0, 3)); const h = sum(all.slice(3));
+      const [name, tip, href] = personas[f >= 4 && h >= 4 ? 'both' : f >= 4 ? 'fin' : h >= 4 ? 'hel' : 'none'];
+      const out = $('as-result'); out.replaceChildren();
+      const title = document.createElement('h3'); title.textContent = name;
+      const info = document.createElement('p'); info.textContent = `Skor uang ${f}/6 · Skor kebiasaan sehat ${h}/6. ${tip}`;
+      const go = document.createElement('a'); go.className = 'text-link'; go.href = href; go.textContent = 'Lanjut belajar';
+      const wa = document.createElement('a'); wa.className = 'btn secondary'; wa.target = '_blank'; wa.rel = 'noopener noreferrer';
+      wa.textContent = 'Bagikan ke WhatsApp';
+      wa.href = `https://wa.me/?text=${encodeURIComponent(`Profilku di LokaPelita: ${name}! Coba cek punyamu: https://lokapelita.vercel.app/#skor-hidup`)}`;
+      out.append(title, info, go, document.createElement('br'), wa);
+      coach(out, f >= h ? 'Pelita' : 'Loka', 'happy', 'Terima kasih sudah jujur pada diri sendiri. Satu langkah kecil sudah cukup!');
+      out.hidden = false; title.tabIndex = -1; title.focus();
+    });
+  }
 })();
