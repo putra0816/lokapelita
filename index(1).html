@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LokaPelita — Belajar Uang, Rawat Diri</title>
+  <meta name="description" content="Ruang belajar interaktif keuangan bersama Pelita dan kesehatan bersama Loka. Dilengkapi kalkulator simulasi, kuis edukatif, dan konsultasi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --pelita-primary: #0F766E;
+      --pelita-light: #CCFBF1;
+      --pelita-soft: #F0FDFA;
+      --loka-primary: #D97706;
+      --loka-light: #FEF3C7;
+      --loka-soft: #FFFBEB;
+      --border-color: #E2E8F0;
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.07);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* Top Collab Banner */
+    .top-banner {
+      background: #0F172A;
+      color: #F8FAFC;
+      font-size: 0.82rem;
+      padding: 8px 16px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .top-banner a {
+      background: #F59E0B;
+      color: #0F172A;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      transition: transform 0.2s ease;
+    }
+    .top-banner a:hover { transform: scale(1.03); }
+
+    /* Sticky Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+    .brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-btn:hover {
+      background: #F1F5F9;
+      color: var(--text-primary);
+    }
+
+    .nav-btn.active {
+      background: var(--text-primary);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    }
+
+    .nav-btn.nav-cta {
+      background: var(--pelita-primary);
+      color: #FFFFFF;
+    }
+    .nav-btn.nav-cta:hover { background: #0D9488; }
+    .nav-btn.nav-cta.active {
+      background: #0F172A;
+      outline: 2px solid var(--pelita-primary);
+    }
+
+    /* Mobile Hamburger */
+    .mobile-toggle {
+      display: none;
+      background: #F1F5F9;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* Main Container & Smooth Page Transition */
+    main {
+      flex: 1;
+      max-width: 1120px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    .page-view {
+      display: none;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+
+    .page-view.active {
+      display: block;
+      animation: smoothPageEnter 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes smoothPageEnter {
+      0% {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Typography & Section Headers */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .badge-pelita { background: var(--pelita-light); color: var(--pelita-primary); }
+    .badge-loka { background: var(--loka-light); color: var(--loka-primary); }
+    .badge-neutral { background: #E2E8F0; color: #334155; }
+
+    h1 { font-size: clamp(2rem, 4vw, 2.85rem); font-weight: 800; line-height: 1.18; margin-bottom: 16px; }
+    h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; line-height: 1.25; margin-bottom: 10px; }
+    h3 { font-size: 1.18rem; font-weight: 700; margin-bottom: 8px; }
+    p.lead { font-size: 1.08rem; color: var(--text-secondary); max-width: 640px; margin-bottom: 24px; }
+
+    /* Buttons */
+    .btn-group { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+    .btn-pelita { background: var(--pelita-primary); color: #fff; }
+    .btn-pelita:hover { background: #0D9488; transform: translateY(-1px); }
+    .btn-loka { background: var(--loka-primary); color: #fff; }
+    .btn-loka:hover { background: #B45309; transform: translateY(-1px); }
+    .btn-outline { background: #fff; color: var(--text-primary); border: 1px solid var(--border-color); }
+    .btn-outline:hover { background: #F1F5F9; }
+    .btn-sm { padding: 8px 14px; font-size: 0.84rem; border-radius: 10px; }
+
+    /* Hero Grid (Beranda) */
+    .hero-card {
+      background: linear-gradient(135deg, #FFFFFF 0%, #F0FDFA 55%, #FFFBEB 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 32px;
+      align-items: center;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 32px;
+    }
+
+    .character-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .char-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .char-box img {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    /* Quick Navigation Hub Cards on Beranda */
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .hub-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hub-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: #CBD5E1;
+    }
+    .hub-card .hub-arrow {
+      margin-top: 16px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--pelita-primary);
+    }
+
+    /* Content Modules Grid */
+    .page-header-banner {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .page-header-banner img {
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 20px;
+    }
+
+    .module-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .module-num {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--pelita-primary);
+    }
+    .module-num.loka { color: var(--loka-primary); }
+
+    .action-tip {
+      background: #F8FAFC;
+      border-left: 3px solid var(--pelita-primary);
+      padding: 10px 14px;
+      border-radius: 0 10px 10px 0;
+      font-size: 0.9rem;
+    }
+    .action-tip.loka { border-left-color: var(--loka-primary); }
+
+    .ref-list {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border-color);
+      font-size: 0.84rem;
+    }
+    .ref-list span {
+      display: block;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+    .ref-list ul { padding-left: 18px; color: var(--pelita-primary); }
+    .ref-list li { margin-bottom: 4px; }
+    .ref-list a:hover { text-decoration: underline; }
+
+    /* Sub-tabs inside Simulasi & Kuis */
+    .sub-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      background: #E2E8F0;
+      padding: 6px;
+      border-radius: 14px;
+      width: fit-content;
+    }
+    .sub-tab-btn {
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 9px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+    .sub-tab-btn.active {
+      background: #FFFFFF;
+      color: var(--text-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sub-panel { display: none; animation: smoothPageEnter 0.3s ease forwards; }
+    .sub-panel.active { display: block; }
+
+    /* Calculator Forms */
+    .calc-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 22px;
+      padding: 28px;
+      max-width: 680px;
+      box-shadow: var(--shadow-sm);
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid #CBD5E1;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    .form-control:focus { outline: 2px solid var(--pelita-primary); border-color: transparent; }
+    .helper-text { font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
+
+    .result-box {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 14px;
+      background: var(--pelita-soft);
+      border: 1px solid var(--pelita-light);
+      display: none;
+    }
+    .result-box.loka {
+      background: var(--loka-soft);
+      border-color: var(--loka-light);
+    }
+    .result-box.show { display: block; animation: smoothPageEnter 0.3s ease; }
+
+    /* Quiz Styling */
+    .quiz-option {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 13px 16px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: #FFFFFF;
+      font-family: inherit;
+      font-size: 0.94rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .quiz-option:hover { background: #F8FAFC; border-color: #94A3B8; }
+    .quiz-option.selected { border-color: var(--pelita-primary); background: var(--pelita-soft); font-weight: 700; }
+    .quiz-option.correct { border-color: #16A34A; background: #DCFCE7; color: #14532D; font-weight: 700; }
+    .quiz-option.wrong { border-color: #DC2626; background: #FEE2E2; color: #7F1D1D; }
+
+    /* Footer */
+    footer {
+      background: #FFFFFF;
+      border-top: 1px solid var(--border-color);
+      padding: 32px 20px;
+      margin-top: auto;
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 24px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 820px) {
+      .hero-card { grid-template-columns: 1fr; padding: 24px; }
+      .mobile-toggle { display: block; }
+      .nav-menu {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        padding-top: 12px;
+        border-top: 1px solid var(--border-color);
+      }
+      .nav-menu.open { display: flex; }
+      .nav-container { flex-wrap: wrap; }
+      .page-header-banner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-banner">
+    <span><strong>Kolaborasi &amp; mitra:</strong> ingin memasarkan produk atau bekerja sama dengan LokaPelita?</span>
+    <a href="https://www.instagram.com/lokapelitafinancial/" target="_blank" rel="noopener noreferrer">Ajukan kolaborasi</a>
+  </div>
+
+  <!-- Navbar -->
+  <header>
+    <div class="nav-container">
+      <div class="brand" onclick="navigateTo('beranda')">
+        <img src="assets/logo.webp" alt="Logo LokaPelita" onerror="this.style.display='none'">
+        <span>LokaPelita</span>
+      </div>
+
+      <button class="mobile-toggle" onclick="toggleMobileMenu()" aria-label="Buka Menu">☰ Menu</button>
+
+      <nav class="nav-menu" id="navMenu">
+        <button class="nav-btn active" data-page="beranda" onclick="navigateTo('beranda')">Beranda</button>
+        <button class="nav-btn" data-page="finansial" onclick="navigateTo('finansial')">Finansial</button>
+        <button class="nav-btn" data-page="kesehatan" onclick="navigateTo('kesehatan')">Kesehatan</button>
+        <button class="nav-btn" data-page="simulasi" onclick="navigateTo('simulasi')">Simulasi</button>
+        <button class="nav-btn" data-page="kuis" onclick="navigateTo('kuis')">Kuis &amp; Skor</button>
+        <button class="nav-btn nav-cta" data-page="konsultasi" onclick="navigateTo('konsultasi')">Konsultasi</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Multi-Page Viewport -->
+  <main>
+
+    <!-- ==================== HALAMAN 1: BERANDA ==================== -->
+    <section id="page-beranda" class="page-view active">
+      <div class="hero-card">
+        <div>
+          <span class="badge badge-neutral">Ruang belajar Loka &amp; Pelita</span>
+          <h1>Belajar uang, rawat diri.</h1>
+          <p class="lead">Rapikan keuangan dan bangun kebiasaan sehat bersama Loka yang ceria dan Pelita yang tenang. Pilih topik di bawah untuk mulai dari satu langkah kecil hari ini.</p>
+          <div class="btn-group">
+            <button class="btn btn-pelita" onclick="navigateTo('finansial')">Jelajahi Finansial</button>
+            <button class="btn btn-loka" onclick="navigateTo('kesehatan')">Jelajahi Kesehatan</button>
+          </div>
+          <p class="helper-text" style="margin-top: 14px;">Materi edukasi umum · Terbuka untuk semua pembaca</p>
+        </div>
+
+        <div class="character-showcase">
+          <div class="char-box">
+            <img src="assets/loka-happy.webp" alt="Loka tersenyum ceria">
+            <h3>Loka</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Ceria dan ekspresif. Temanmu mencoba kebiasaan sehat dengan cara menyenangkan.</p>
+          </div>
+          <div class="char-box">
+            <img src="assets/pelita-explaining.webp" alt="Pelita menjelaskan">
+            <h3>Pelita</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Tenang, hangat, dan jelas. Temanmu memahami uang tanpa istilah berbelit.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 14px;">Pilih Ruang Belajarmu</h3>
+      <div class="hub-grid">
+        <div class="hub-card" onclick="navigateTo('finansial')">
+          <div>
+            <span class="badge badge-pelita">01 · Pelita</span>
+            <h3>Finansial Terarah</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Anggaran harian, dana darurat, reksa dana, proteksi asuransi, hingga rencana pensiun.</p>
+          </div>
+          <div class="hub-arrow">Buka Halaman Finansial →</div>
+        </div>
+
+        <div class="hub-card" onclick="navigateTo('kesehatan')">
+          <div>
+            <span class="badge badge-loka">02 · Loka</span>
+            <h3>Kesehatan Harian</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Aktivitas fisik ringan, panduan Isi Piringku, rutinitas tidur, dan menjaga kesehatan mental.</p>
+          </div>
+          <div class="hub-arrow" style="color: var(--loka-primary);">Buka Halaman Kesehatan →</div>
+        </div>
+
+        <div class="hub-card" onclick="navigateTo('simulasi')">
+          <div>
+            <span class="badge badge-neutral">03 · Kalkulator</span>
+            <h3>Simulasi Angka &amp; Tubuh</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Hitung target dana darurat, nilai waktu uang (TVM), FIRE, BMI, dan kebutuhan air harian.</p>
+          </div>
+          <div class="hub-arrow">Coba Kalkulator →</div>
+        </div>
+
+        <div class="hub-card" onclick="navigateTo('kuis')">
+          <div>
+            <span class="badge badge-neutral">04 · Interaktif</span>
+            <h3>Kuis &amp; Skor Keseimbangan</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Uji pemahamanmu lewat 10 soal finansial, 10 soal kesehatan, atau cek profil keseimbangan hidup.</p>
+          </div>
+          <div class="hub-arrow">Mulai Kuis →</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== HALAMAN 2: FINANSIAL ==================== -->
+    <section id="page-finansial" class="page-view">
+      <div class="page-header-banner">
+        <div>
+          <span class="badge badge-pelita">01 · Finansial bersama Pelita</span>
+          <h2>Uang lebih terarah.</h2>
+          <p style="color: var(--text-secondary);">“Kita mulai dari apa yang bisa kamu ukur.” Atur pengeluaran hari ini, pahami risikonya, lalu siapkan tujuan jangka panjang.</p>
+          <div class="btn-group">
+            <button class="btn btn-pelita btn-sm" onclick="navigateTo('simulasi', 'calc-darurat')">Buka Kalkulator Keuangan</button>
+            <button class="btn btn-outline btn-sm" onclick="navigateTo('kuis', 'quiz-finansial')">Ikuti Kuis Finansial</button>
+          </div>
+        </div>
+        <img src="assets/pelita-teaching.webp" alt="Pelita mengajar">
+      </div>
+
+      <div class="modules-grid">
+        <!-- 01 Anggaran -->
+        <article class="module-card">
+          <span class="module-num">01 · ANGGARAN</span>
+          <h3>Gajian lewat, saldo ikut lewat?</h3>
+          <p style="font-size: 0.92rem;">Catat uang masuk dan keluar selama satu minggu. Tandai pengeluaran wajib seperti makan dan transportasi, lalu pisahkan pengeluaran yang bisa ditunda.</p>
+          <div class="action-tip"><strong>Coba hari ini:</strong> pilih satu pengeluaran yang ingin dibatasi minggu depan dan pantau hasilnya setelah 7 hari.</div>
+          <p style="font-size: 0.86rem; color: var(--text-secondary);"><strong>Urutan fondasi:</strong> 1. Arus kas → 2. Dana darurat → 3. Proteksi → 4. Investasi → 5. Pensiun.</p>
+          <div class="ref-list">
+            <span>Referensi belajar:</span>
+            <ul>
+              <li><a href="https://katadata.co.id/lifestyle/varia/6ae31d61dac87/metode-503020-cara-mengatur-gaji-dan-keuangan-bulanan" target="_blank" rel="noopener noreferrer">Katadata: Metode 50/30/20 mengatur gaji bulanan</a></li>
+              <li><a href="https://www.antaranews.com/berita/5676352/10-cara-mengatur-keuangan-bulanan-agar-gaji-tidak-cepat-habis" target="_blank" rel="noopener noreferrer">Antara: 10 cara mengatur keuangan bulanan</a></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 02 Dana Darurat -->
+        <article class="module-card">
+          <span class="module-num">02 · DANA DARURAT</span>
+          <h3>Siapkan cadangan untuk hal tak terduga</h3>
+          <p style="font-size: 0.92rem;">Dana darurat adalah uang cadangan untuk kebutuhan mendesak saat pendapatan turun atau muncul biaya tak terduga. Hitung pengeluaran pokok bulanan terlebih dahulu.</p>
+          <div class="action-tip"><strong>Coba hari ini:</strong> pisahkan cadangan dari rekening belanja harian di instrumen yang mudah dicairkan.</div>
+          <button class="btn btn-outline btn-sm" onclick="navigateTo('simulasi', 'calc-darurat')">Hitung Target Dana Darurat →</button>
+          <div class="ref-list">
+            <span>Referensi belajar:</span>
+            <ul>
+              <li><a href="https://pegadaian.co.id/artikel/keuangan/ketahui-berapa-dana-darurat-yang-wajib-kamu-punya" target="_blank" rel="noopener noreferrer">Pegadaian: Berapa besaran dana darurat ideal?</a></li>
+              <li><a href="https://www.kompas.tv/ekonomi/628433/3-tempat-simpan-dana-darurat-yang-aman-menurut-ojk" target="_blank" rel="noopener noreferrer">Kompas TV: 3 tempat simpan dana darurat aman</a></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 03 Investasi -->
+        <article class="module-card">
+          <span class="module-num">03 · INVESTASI</span>
+          <h3>Kenali reksa dana dan risikonya</h3>
+          <p style="font-size: 0.92rem;">Reksa dana menghimpun dana investor untuk dikelola manajer investasi pada pasar uang, obligasi, atau saham. Nilainya bisa turun dan hasilnya tidak dijamin.</p>
+          <div class="action-tip"><strong>Sebelum memilih:</strong> baca prospektus dan ringkasan produk. Perhatikan aset dasar, biaya, risiko, dan aturan pencairan.</div>
+          <button class="btn btn-outline btn-sm" onclick="navigateTo('simulasi', 'calc-tvm')">Simulasi Nilai Waktu Uang →</button>
+          <div class="ref-list">
+            <span>Referensi belajar:</span>
+            <ul>
+              <li><a href="https://sikapiuangmu.ojk.go.id" target="_blank" rel="noopener noreferrer">Portal Edukasi Pasar Modal (Sikapi Uangmu OJK)</a></li>
+              <li><a href="https://www.antaranews.com/berita/5695820/mau-mulai-investasi-ini-perbandingan-reksa-dana-dan-emas-untuk-pemula" target="_blank" rel="noopener noreferrer">Antara: Perbandingan reksa dana dan emas</a></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 04 Asuransi -->
+        <article class="module-card">
+          <span class="module-num">04 · ASURANSI</span>
+          <h3>Kenali perlindungan sebelum membeli polis</h3>
+          <p style="font-size: 0.92rem;">Asuransi menanggung risiko tertentu sesuai polis. Cek perlindungan yang sudah dimiliki seperti JKN atau fasilitas kantor sebelum menambah polis baru.</p>
+          <div class="action-tip"><strong>Coba hari ini:</strong> bandingkan dua polis serupa dan minta penjelasan tertulis mengenai pengecualian serta masa tunggu.</div>
+          <div class="ref-list">
+            <span>Referensi belajar:</span>
+            <ul>
+              <li><a href="https://keuangan.kontan.co.id/news/berniat-membeli-produk-asuransi-cek-tips-dari-ojk" target="_blank" rel="noopener noreferrer">Kontan: Tips memilih produk asuransi dari OJK</a></li>
+              <li><a href="https://sikapiuangmu.ojk.go.id" target="_blank" rel="noopener noreferrer">Seri Literasi Keuangan Asuransi (OJK)</a></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 05 Pensiun -->
+        <article class="module-card">
+          <span class="module-num">05 · PERENCANAAN PENSIUN</span>
+          <h3>Mulai dari pengeluaran, bukan angka besar</h3>
+          <p style="font-size: 0.92rem;">Bayangkan pengeluaran rutin saat pensiun, lalu kurangi dengan penghasilan pensiun bulanan yang tersedia. Selisihnya perlu ditopang tabungan atau investasi.</p>
+          <div class="action-tip"><strong>Coba hari ini:</strong> pisahkan dana pensiun dari dana darurat dan tentukan setoran bulanan yang realistis.</div>
+          <button class="btn btn-outline btn-sm" onclick="navigateTo('simulasi', 'calc-fire')">Jajaki Target Pensiun FIRE →</button>
+          <div class="ref-list">
+            <span>Referensi belajar:</span>
+            <ul>
+              <li><a href="https://www.kompas.tv/ekonomi/616671/7-tips-menyiapkan-dana-pensiun-agar-hidup-tenang-di-masa-tua" target="_blank" rel="noopener noreferrer">Kompas TV: 7 tips menyiapkan dana pensiun</a></li>
+              <li><a href="https://sikapiuangmu.ojk.go.id" target="_blank" rel="noopener noreferrer">Panduan Perencanaan Pensiun (OJK)</a></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== HALAMAN 3: KESEHATAN ==================== -->
+    <section id="page-kesehatan" class="page-view">
+      <div class="page-header-banner">
+        <div>
+          <span class="badge badge-loka">02 · Kesehatan bersama Loka</span>
+          <h2>Rawat diri, pelan-pelan.</h2>
+          <p style="color: var(--text-secondary);">“Jalan santai juga hitungannya bergerak!” Pilih satu kebiasaan yang terasa paling mungkin untuk kamu coba hari ini.</p>
+          <div class="btn-group">
+            <button class="btn btn-loka btn-sm" onclick="navigateTo('simulasi', 'calc-bmi')">Cek BMI &amp; Kebutuhan Air</button>
+            <button class="btn btn-outline btn-sm" onclick="navigateTo('kuis', 'quiz-kesehatan')">Ikuti Kuis Kesehatan</button>
+          </div>
+        </div>
+        <img src="assets/loka-health-running.webp" alt="Loka berlari">
+      </div>
+
+      <div class="modules-grid">
+        <!-- 01 Aktivitas Fisik -->
+        <article class="module-card">
+          <span class="module-num loka">01 · AKTIVITAS FISIK</span>
+          <h3>Jalan santai untuk mulai bergerak</h3>
+          <p style="font-size: 0.92rem;">Berjalan kaki, bersepeda, dan menari termasuk aktivitas fisik. Pilih yang kamu sukai dan sesuaikan durasi serta intensitasnya dengan kemampuan tubuhmu.</p>
+          <div class="action-tip loka"><strong>Coba hari ini:</strong> sisipkan jalan santai 10–15 menit setelah makan siang atau jeda peregangan di sela duduk lama.</div>
+          <div class="ref-list">
+            <span>Referensi belajar:</span>
+            <ul>
+              <li><a href="https://www.alodokter.com/manfaat-latihan-kebugaran-jasmani-bagi-fisik-dan-mental" target="_blank" rel="noopener noreferrer">Alodokter: Manfaat latihan kebugaran jasmani</a></li>
+              <li><a href="https://www.antaranews.com/berita/5766584/berapa-menit-jalan-kaki-untuk-menjaga-kesehatan-jantung" target="_blank" rel="noopener noreferrer">Antara: Durasi jalan kaki untuk kesehatan jantung</a></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 02 Pola Makan -->
+        <article class="module-card">
+          <span class="module-num loka">02 · POLA MAKAN SEHAT</span>
+          <h3>Atur pola makan tanpa aturan ekstrem</h3>
+          <p style="font-size: 0.92rem;">Panduan <strong>Isi Piringku</strong> membagi piring makan menjadi: Sayur (1/3), Buah (1/6), Makanan pokok (1/3), dan Lauk pauk (1/6).</p>
+          <div class="action-tip loka"><strong>Coba hari ini:</strong> utamakan air putih dan cek label gula, garam, serta lemak pada makanan kemasan.</div>
+          <div class="ref-list">
+            <span>Referensi belajar:</span>
+            <ul>
+              <li><a href="https://www.ekahospital.com/better-healths/memahami-panduan-gizi-seimbang-yang-tepat" target="_blank" rel="noopener noreferrer">Eka Hospital: Panduan gizi seimbang Isi Piringku</a></li>
+              <li><a href="https://gorontalo.antaranews.com/berita/259395/bpom-perhatikan-isi-piringku-dan-ing-untuk-asupan-gizi-seimbang" target="_blank" rel="noopener noreferrer">Antara: BPOM &amp; Informasi Nilai Gizi</a></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 03 Rutinitas Malam -->
+        <article class="module-card">
+          <span class="module-num loka">03 · RUTINITAS MALAM</span>
+          <h3>Biasakan jadwal tidur yang lebih teratur</h3>
+          <p style="font-size: 0.92rem;">Gunakan jam tidur dan bangun yang konsisten setiap hari. Siapkan suasana kamar yang tenang dan hindari konsumsi kafein mendekati waktu tidur.</p>
+          <div class="action-tip loka"><strong>Coba hari ini:</strong> kurangi paparan layar gawai 30 menit sebelum jam tidur targetmu.</div>
+          <div class="ref-list">
+            <span>Referensi belajar:</span>
+            <ul>
+              <li><a href="https://www.alodokter.com/kesulitan-tidur-coba-terapkan-sleep-hygiene" target="_blank" rel="noopener noreferrer">Alodokter: Terapkan sleep hygiene untuk sulit tidur</a></li>
+              <li><a href="https://www.antaranews.com/berita/5681593/apa-itu-sleep-hygiene-ini-manfaat-dan-10-cara-menerapkannya-agar-tidur-nyenyak" target="_blank" rel="noopener noreferrer">Antara: 10 cara menerapkan sleep hygiene</a></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 04 Kesehatan Mental -->
+        <article class="module-card">
+          <span class="module-num loka">04 · KESEHATAN MENTAL</span>
+          <h3>Ambil jeda dan rawat pikiranmu</h3>
+          <p style="font-size: 0.92rem;">Saat tertekan, berhenti sejenak: rasakan telapak kaki menyentuh lantai dan kenali suara di sekitarmu. Jika keluhan menetap, hubungi tenaga kesehatan atau layanan Kemenkes 119.</p>
+          <div class="action-tip loka"><strong>Setelah jeda:</strong> tulis hal yang membebani dan pecah menjadi satu langkah kecil yang bisa dikerjakan hari ini.</div>
+          <div class="ref-list">
+            <span>Referensi belajar:</span>
+            <ul>
+              <li><a href="https://www.alodokter.com/tidak-hanya-sehat-badan-kesehatan-mental-juga-penting-dijaga" target="_blank" rel="noopener noreferrer">Alodokter: 7 cara menjaga kesehatan mental</a></li>
+              <li><a href="https://www.alodokter.com/cari-tahu-informasi-seputar-kesehatan-mental-di-sini" target="_blank" rel="noopener noreferrer">Alodokter: Pentingnya merawat kesehatan mental</a></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== HALAMAN 4: SIMULASI ==================== -->
+    <section id="page-simulasi" class="page-view">
+      <span class="badge badge-neutral">03 · Alat Belajar Interaktif</span>
+      <h2>Coba hitung skenariomu.</h2>
+      <p class="lead">Pilih kalkulator di bawah. Semua perhitungan berjalan langsung di perangkatmu dan tidak disimpan ke server mana pun.</p>
+
+      <!-- Sub-menu Kalkulator -->
+      <div class="sub-tabs" role="tablist">
+        <button class="sub-tab-btn active" data-sub="calc-darurat" onclick="switchSubTab('simulasi', 'calc-darurat')">Dana Darurat</button>
+        <button class="sub-tab-btn" data-sub="calc-tvm" onclick="switchSubTab('simulasi', 'calc-tvm')">Nilai Waktu Uang</button>
+        <button class="sub-tab-btn" data-sub="calc-fire" onclick="switchSubTab('simulasi', 'calc-fire')">Pensiun FIRE</button>
+        <button class="sub-tab-btn" data-sub="calc-bmi" onclick="switchSubTab('simulasi', 'calc-bmi')">Kalkulator BMI</button>
+        <button class="sub-tab-btn" data-sub="calc-air" onclick="switchSubTab('simulasi', 'calc-air')">Kebutuhan Air</button>
+      </div>
+
+      <!-- 1. Kalkulator Dana Darurat -->
+      <div id="sub-calc-darurat" class="sub-panel active">
+        <div class="calc-card">
+          <span class="badge badge-pelita">Pelita · Cadangan Risiko</span>
+          <h3>Berapa target dana daruratmu?</h3>
+          <p class="helper-text" style="margin-bottom: 16px;">Simulasi 3–6 bulan pengeluaran pokok untuk lajang, atau 6–12 bulan untuk menikah.</p>
+          <div class="form-group">
+            <label for="ed-expense">Pengeluaran pokok per bulan (Rp)</label>
+            <input type="number" id="ed-expense" class="form-control" value="4000000" min="0" step="100000">
+          </div>
+          <div class="form-group">
+            <label for="ed-status">Status</label>
+            <select id="ed-status" class="form-control">
+              <option value="single">Lajang (cadangan 3–6 bulan)</option>
+              <option value="married">Menikah (cadangan 6–12 bulan)</option>
+            </select>
+          </div>
+          <button class="btn btn-pelita" onclick="calcEmergencyFund()">Hitung Target</button>
+          <div id="res-darurat" class="result-box"></div>
+        </div>
+      </div>
+
+      <!-- 2. Kalkulator TVM -->
+      <div id="sub-calc-tvm" class="sub-panel">
+        <div class="calc-card">
+          <span class="badge badge-pelita">Pelita · Investasi</span>
+          <h3>Nilai waktu uang (Future Value)</h3>
+          <p class="helper-text" style="margin-bottom: 16px;">Simulasi pertumbuhan dana dengan setoran rutin bulanan dan imbal hasil efektif tahunan.</p>
+          <div class="form-group">
+            <label for="tvm-pv">Modal awal (Rp)</label>
+            <input type="number" id="tvm-pv" class="form-control" value="10000000" min="0">
+          </div>
+          <div class="form-group">
+            <label for="tvm-pmt">Setoran per bulan (Rp)</label>
+            <input type="number" id="tvm-pmt" class="form-control" value="1000000" min="0">
+          </div>
+          <div class="form-group">
+            <label for="tvm-years">Jangka waktu (tahun)</label>
+            <input type="number" id="tvm-years" class="form-control" value="5" min="1" max="50">
+          </div>
+          <div class="form-group">
+            <label for="tvm-rate">Asumsi imbal hasil per tahun (%)</label>
+            <input type="number" id="tvm-rate" class="form-control" value="6" step="0.1">
+          </div>
+          <button class="btn btn-pelita" onclick="calcTVM()">Hitung Nilai Uang</button>
+          <div id="res-tvm" class="result-box"></div>
+        </div>
+      </div>
+
+      <!-- 3. Kalkulator FIRE -->
+      <div id="sub-calc-fire" class="sub-panel">
+        <div class="calc-card">
+          <span class="badge badge-pelita">Pelita · Kemandirian Finansial</span>
+          <h3>Rencanakan target FIRE</h3>
+          <p class="helper-text" style="margin-bottom: 16px;">Rumus: (Pengeluaran bulanan − Pendapatan pasif lain) × 12 ÷ Tingkat penarikan awal (%).</p>
+          <div class="form-group">
+            <label for="fire-exp">Pengeluaran per bulan saat pensiun (Rp)</label>
+            <input type="number" id="fire-exp" class="form-control" value="6000000" min="0">
+          </div>
+          <div class="form-group">
+            <label for="fire-passive">Pendapatan rutin lain saat pensiun (Rp/bulan)</label>
+            <input type="number" id="fire-passive" class="form-control" value="1000000" min="0">
+          </div>
+          <div class="form-group">
+            <label for="fire-swr">Tingkat penarikan awal per tahun (%)</label>
+            <input type="number" id="fire-swr" class="form-control" value="4" min="1" max="10" step="0.5">
+          </div>
+          <button class="btn btn-pelita" onclick="calcFIRE()">Hitung Target FIRE</button>
+          <div id="res-fire" class="result-box"></div>
+        </div>
+      </div>
+
+      <!-- 4. Kalkulator BMI -->
+      <div id="sub-calc-bmi" class="sub-panel">
+        <div class="calc-card">
+          <span class="badge badge-loka">Loka · Berat Badan</span>
+          <h3>Kalkulator Body Mass Index (BMI)</h3>
+          <p class="helper-text" style="margin-bottom: 16px;">Kategori batas Indonesia: &lt;18,5 kurang, 18,5–24,9 normal, 25–26,9 berat berlebih, ≥27 obesitas.</p>
+          <div class="form-group">
+            <label for="bmi-height">Tinggi badan (cm)</label>
+            <input type="number" id="bmi-height" class="form-control" value="165" min="100" max="250">
+          </div>
+          <div class="form-group">
+            <label for="bmi-weight">Berat badan (kg)</label>
+            <input type="number" id="bmi-weight" class="form-control" value="60" min="25" max="250" step="0.5">
+          </div>
+          <button class="btn btn-loka" onclick="calcBMI()">Hitung BMI</button>
+          <div id="res-bmi" class="result-box loka"></div>
+        </div>
+      </div>
+
+      <!-- 5. Kalkulator Kebutuhan Air -->
+      <div id="sub-calc-air" class="sub-panel">
+        <div class="calc-card">
+          <span class="badge badge-loka">Loka · Hidrasi</span>
+          <h3>Kebutuhan air putih harian</h3>
+          <p class="helper-text" style="margin-bottom: 16px;">Perkiraan: berat badan × 30 ml (ringan), 35 ml (sedang), atau 40 ml (aktif).</p>
+          <div class="form-group">
+            <label for="water-weight">Berat badan (kg)</label>
+            <input type="number" id="water-weight" class="form-control" value="60" min="25" max="250">
+          </div>
+          <div class="form-group">
+            <label for="water-act">Aktivitas harian</label>
+            <select id="water-act" class="form-control">
+              <option value="30">Ringan (banyak duduk)</option>
+              <option value="35" selected>Sedang (olahraga 1–3 kali/minggu)</option>
+              <option value="40">Aktif (olahraga 4+ kali/minggu atau kerja fisik)</option>
+            </select>
+          </div>
+          <button class="btn btn-loka" onclick="calcWater()">Hitung Kebutuhan Air</button>
+          <div id="res-air" class="result-box loka"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== HALAMAN 5: KUIS & SKOR ==================== -->
+    <section id="page-kuis" class="page-view">
+      <span class="badge badge-neutral">04 · Uji Pemahaman</span>
+      <h2>Kuis &amp; Skor Keseimbangan.</h2>
+      <p class="lead">Pilih topik kuis di bawah untuk menguji pemahamanmu sekaligus mendapatkan penjelasan singkat.</p>
+
+      <div class="sub-tabs">
+        <button class="sub-tab-btn active" data-sub="quiz-finansial" onclick="switchSubTab('kuis', 'quiz-finansial')">Kuis Finansial Pelita</button>
+        <button class="sub-tab-btn" data-sub="quiz-kesehatan" onclick="switchSubTab('kuis', 'quiz-kesehatan')">Kuis Kesehatan Loka</button>
+        <button class="sub-tab-btn" data-sub="quiz-balance" onclick="switchSubTab('kuis', 'quiz-balance')">Skor Keseimbangan Hidup</button>
+      </div>
+
+      <!-- Kuis Finansial -->
+      <div id="sub-quiz-finansial" class="sub-panel active">
+        <div class="calc-card" id="fin-quiz-box"></div>
+      </div>
+
+      <!-- Kuis Kesehatan -->
+      <div id="sub-quiz-kesehatan" class="sub-panel">
+        <div class="calc-card" id="health-quiz-box"></div>
+      </div>
+
+      <!-- Skor Keseimbangan Hidup -->
+      <div id="sub-quiz-balance" class="sub-panel">
+        <div class="calc-card">
+          <span class="badge badge-neutral">Refleksi 6 Pertanyaan</span>
+          <h3>Cek Skor Keseimbangan Hidupmu</h3>
+          <div class="form-group">
+            <label>1. Seberapa rutin kamu mencatat pengeluaran bulanan?</label>
+            <select id="bal-1" class="form-control">
+              <option value="1">Hampir tidak pernah</option>
+              <option value="2">Kadang-kadang</option>
+              <option value="3">Rutin tiap bulan</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>2. Bagaimana dana daruratmu saat ini?</label>
+            <select id="bal-2" class="form-control">
+              <option value="1">Belum ada</option>
+              <option value="2">Ada, kurang dari 3 bulan pengeluaran</option>
+              <option value="3">Sudah 3 bulan pengeluaran atau lebih</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>3. Sudah mengecek manfaat perlindungan (JKN/asuransi)?</label>
+            <select id="bal-3" class="form-control">
+              <option value="1">Belum</option>
+              <option value="2">Sebagian</option>
+              <option value="3">Sudah paham detailnya</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>4. Seberapa sering kamu bergerak atau berolahraga?</label>
+            <select id="bal-4" class="form-control">
+              <option value="1">Hampir tidak pernah</option>
+              <option value="2">1–2 kali per minggu</option>
+              <option value="3">3 kali atau lebih per minggu</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>5. Bagaimana pola tidurmu?</label>
+            <select id="bal-5" class="form-control">
+              <option value="1">Sering kurang dari 6 jam</option>
+              <option value="2">Kadang tidak teratur</option>
+              <option value="3">Umumnya 7–9 jam dan teratur</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>6. Seberapa sering piringmu berisi sayur dan buah?</label>
+            <select id="bal-6" class="form-control">
+              <option value="1">Jarang</option>
+              <option value="2">Kadang-kadang</option>
+              <option value="3">Hampir setiap makan</option>
+            </select>
+          </div>
+          <button class="btn btn-pelita" onclick="calcLifeBalance()">Lihat Profilku</button>
+          <div id="res-balance" class="result-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== HALAMAN 6: KONSULTASI ==================== -->
+    <section id="page-konsultasi" class="page-view">
+      <span class="badge badge-neutral">05 · Panduan Memilih &amp; Diskusi</span>
+      <h2>Cek sebelum memilih.</h2>
+      <p class="lead">Gunakan pertanyaan berikut untuk menimbang produk atau jasa sebelum mengambil keputusan penting.</p>
+
+      <div class="modules-grid" style="margin-bottom: 32px;">
+        <div class="module-card">
+          <h3>Emas digital</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Berapa selisih harga beli dan jual? Cek biaya transaksi dan syarat pencairan fisik. Pastikan penyedianya jelas, berizin, dan jelas bukti kepemilikannya.</p>
+        </div>
+        <div class="module-card">
+          <h3>Asuransi kesehatan, sakit kritis, &amp; jiwa</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Asuransi kesehatan menanggung perawatan, sakit kritis memberi santunan diagnosis penyakit tertentu, dan jiwa memberi uang pertanggungan ahli waris. Baca pengecualian &amp; masa tunggu.</p>
+        </div>
+        <div class="module-card">
+          <h3>Perencana keuangan</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Apa ruang lingkup jasanya? Tanyakan kualifikasi sertifikasi, struktur biaya, dan transparansi apakah ada komisi dari produk yang ditawarkan.</p>
+        </div>
+      </div>
+
+      <div class="modules-grid">
+        <div class="module-card" style="border-color: var(--pelita-primary);">
+          <span class="badge badge-pelita">Konsultasi Keuangan</span>
+          <h3>Diskusi dengan Perencana Keuangan CFP®</h3>
+          <p style="font-size: 0.92rem;">Bahas anggaran, dana darurat, proteksi, investasi, atau rencana pensiun secara terukur.</p>
+          <ul style="padding-left: 18px; font-size: 0.88rem; color: var(--text-secondary);">
+            <li>Pemetaan arus kas dan celah risiko.</li>
+            <li>Prioritas langkah 90 hari ke depan.</li>
+            <li>Edukasi murni, tanpa kewajiban membeli produk apa pun.</li>
+          </ul>
+          <div class="btn-group">
+            <a href="https://rencanabijak.com/cfp/bangunsetiaputra-cfp" target="_blank" rel="noopener noreferrer" class="btn btn-pelita btn-sm">Atur Jadwal Konsultasi</a>
+            <a href="https://wa.me/6285215408220?text=Halo%2C%20saya%20dari%20LokaPelita.%20Saya%20ingin%20konsultasi%20keuangan." target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Konsultasi via WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="module-card" style="border-color: var(--loka-primary);">
+          <span class="badge badge-loka">Konsultasi Kesehatan</span>
+          <h3>Diskusi dengan Praktisi Kesehatan</h3>
+          <p style="font-size: 0.92rem;">Punya pertanyaan seputar pola makan harian, aktivitas fisik yang aman, rutinitas tidur, atau pengelolaan stres?</p>
+          <div class="btn-group" style="margin-top: auto;">
+            <a href="https://wa.me/6285215408220?text=Halo%2C%20saya%20dari%20LokaPelita.%20Saya%20ingin%20konsultasi%20kesehatan." target="_blank" rel="noopener noreferrer" class="btn btn-loka btn-sm">Konsultasi via WhatsApp</a>
+            <a href="https://www.instagram.com/lokapelitahealth/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">DM Instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <strong style="color: var(--text-primary); font-size: 1rem;">LokaPelita</strong>
+        <p>Belajar uang, rawat diri. Langkah kecil tiap hari.</p>
+        <p style="margin-top: 8px; font-size: 0.8rem;">© 2026 LokaPelita · Materi edukasi umum, bukan nasihat keuangan pribadi atau diagnosis medis.</p>
+      </div>
+      <div>
+        <strong style="color: var(--text-primary);">Ikuti LokaPelita</strong>
+        <p style="margin-top: 4px;">
+          <a href="https://www.instagram.com/lokapelitafinancial/" target="_blank" rel="noopener noreferrer" style="color: var(--pelita-primary); font-weight: 600;">@lokapelitafinancial</a> · 
+          <a href="https://www.instagram.com/lokapelitahealth/" target="_blank" rel="noopener noreferrer" style="color: var(--loka-primary); font-weight: 600;">@lokapelitahealth</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ==================== ROUTING & SMOOTH TRANSITION ====================
+    const validPages = ['beranda', 'finansial', 'kesehatan', 'simulasi', 'kuis', 'konsultasi'];
+
+    function navigateTo(pageId, subTabId = null, updateHash = true) {
+      if (!validPages.includes(pageId)) pageId = 'beranda';
+
+      // Update active navbar button
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.page === pageId);
+      });
+
+      // Switch active page view with smooth CSS animation replay
+      document.querySelectorAll('.page-view').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      const targetSection = document.getElementById(`page-${pageId}`);
+      if (targetSection) {
+        // Trigger reflow so animation plays smoothly on every visit
+        void targetSection.offsetWidth;
+        targetSection.classList.add('active');
+      }
+
+      // If subTabId is passed (e.g., jumping directly to a specific calculator)
+      if (subTabId) {
+        switchSubTab(pageId, subTabId);
+      }
+
+      // Close mobile menu if open
+      document.getElementById('navMenu').classList.remove('open');
+
+      // Update URL hash cleanly
+      if (updateHash && window.location.hash !== `#${pageId}`) {
+        history.pushState(null, '', `#${pageId}`);
+      }
+
+      // Smooth scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchSubTab(pageId, subId) {
+      const parentPage = document.getElementById(`page-${pageId}`);
+      if (!parentPage) return;
+
+      parentPage.querySelectorAll('.sub-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.sub === subId);
+      });
+      parentPage.querySelectorAll('.sub-panel').forEach(panel => {
+        panel.classList.remove('active');
+        if (panel.id === `sub-${subId}`) {
+          void panel.offsetWidth;
+          panel.classList.add('active');
+        }
+      });
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('navMenu').classList.toggle('open');
+    }
+
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#', '');
+      navigateTo(hash || 'beranda', null, false);
+    });
+
+    // ==================== KALKULATOR SIMULASI ====================
+    const formatRp = (num) => 'Rp' + Math.round(num).toLocaleString('id-ID');
+
+    function calcEmergencyFund() {
+      const exp = parseFloat(document.getElementById('ed-expense').value) || 0;
+      const status = document.getElementById('ed-status').value;
+      const minM = status === 'single' ? 3 : 6;
+      const maxM = status === 'single' ? 6 : 12;
+      const res = document.getElementById('res-darurat');
+      res.innerHTML = `
+        <strong>Target Cadangan (${minM}–${maxM} bulan):</strong><br>
+        <span style="font-size:1.25rem; font-weight:800; color:var(--pelita-primary);">${formatRp(exp * minM)} – ${formatRp(exp * maxM)}</span>
+        <p class="helper-text" style="margin-top:6px;">Simpan di rekening terpisah atau reksa dana pasar uang yang mudah dicairkan.</p>
+      `;
+      res.classList.add('show');
+    }
+
+    function calcTVM() {
+      const pv = parseFloat(document.getElementById('tvm-pv').value) || 0;
+      const pmt = parseFloat(document.getElementById('tvm-pmt').value) || 0;
+      const years = parseFloat(document.getElementById('tvm-years').value) || 1;
+      const annualRate = (parseFloat(document.getElementById('tvm-rate').value) || 0) / 100;
+      const months = years * 12;
+      const monthlyRate = Math.pow(1 + annualRate, 1 / 12) - 1;
+
+      let fv = pv * Math.pow(1 + monthlyRate, months);
+      if (monthlyRate !== 0) {
+        fv += pmt * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate);
+      } else {
+        fv += pmt * months;
+      }
+
+      const totalPrincipal = pv + (pmt * months);
+      const res = document.getElementById('res-tvm');
+      res.innerHTML = `
+        <strong>Estimasi Nilai Akhir (${years} tahun):</strong><br>
+        <span style="font-size:1.25rem; font-weight:800; color:var(--pelita-primary);">${formatRp(fv)}</span>
+        <p class="helper-text" style="margin-top:6px;">Total pokok disetor: ${formatRp(totalPrincipal)} · Estimasi pertumbuhan: ${formatRp(fv - totalPrincipal)}</p>
+      `;
+      res.classList.add('show');
+    }
+
+    function calcFIRE() {
+      const exp = parseFloat(document.getElementById('fire-exp').value) || 0;
+      const passive = parseFloat(document.getElementById('fire-passive').value) || 0;
+      const swr = (parseFloat(document.getElementById('fire-swr').value) || 4) / 100;
+      const netAnnual = Math.max(0, (exp - passive) * 12);
+      const fireTarget = swr > 0 ? netAnnual / swr : 0;
+
+      const res = document.getElementById('res-fire');
+      res.innerHTML = `
+        <strong>Target Dana Pensiun (FIRE):</strong><br>
+        <span style="font-size:1.25rem; font-weight:800; color:var(--pelita-primary);">${formatRp(fireTarget)}</span>
+        <p class="helper-text" style="margin-top:6px;">Kebutuhan bersih dari portofolio: ${formatRp(netAnnual)}/tahun dengan tingkat penarikan ${(swr * 100).toFixed(1)}%.</p>
+      `;
+      res.classList.add('show');
+    }
+
+    function calcBMI() {
+      const h = (parseFloat(document.getElementById('bmi-height').value) || 165) / 100;
+      const w = parseFloat(document.getElementById('bmi-weight').value) || 60;
+      const bmi = w / (h * h);
+      let cat = 'Normal';
+      if (bmi < 18.5) cat = 'Berat badan kurang';
+      else if (bmi < 25) cat = 'Normal';
+      else if (bmi < 27) cat = 'Berat badan berlebih';
+      else cat = 'Obesitas';
+
+      const res = document.getElementById('res-bmi');
+      res.innerHTML = `
+        <strong>Skor BMI Kamu: ${bmi.toFixed(1)} (${cat})</strong>
+        <p class="helper-text" style="margin-top:6px;">Gunakan sebagai gambaran awal. Bicarakan dengan tenaga kesehatan untuk penilaian komposisi tubuh menyeluruh.</p>
+      `;
+      res.classList.add('show');
+    }
+
+    function calcWater() {
+      const w = parseFloat(document.getElementById('water-weight').value) || 60;
+      const mult = parseFloat(document.getElementById('water-act').value) || 35;
+      const ml = w * mult;
+      const res = document.getElementById('res-air');
+      res.innerHTML = `
+        <strong>Perkiraan Kebutuhan Air: ${ml.toLocaleString('id-ID')} ml / hari</strong> (${(ml / 1000).toFixed(2)} liter)
+        <p class="helper-text" style="margin-top:6px;">Setara sekitar ${Math.round(ml / 250)} gelas ukuran 250 ml.</p>
+      `;
+      res.classList.add('show');
+    }
+
+    // ==================== KUIS INTERAKTIF & SKOR ====================
+    const quizData = {
+      fin: [
+        { q: 'Apa prioritas utama sebelum mulai berinvestasi di instrumen berisiko tinggi?', opts: ['Meminjam dana agar modal besar', 'Menyiapkan arus kas sehat dan dana darurat', 'Membeli aset yang sedang viral'], ans: 1, exp: 'Dana darurat melindungi investasimu agar tidak terpaksa dicairkan saat pasar turun.' },
+        { q: 'Berapa kisaran ideal dana darurat untuk seseorang yang sudah menikah?', opts: ['1–2 bulan pengeluaran', '6–12 bulan pengeluaran pokok', 'Tidak perlu dana darurat'], ans: 1, exp: 'Keluarga memiliki tanggungan lebih besar sehingga cadangan 6–12 bulan lebih aman.' },
+        { q: 'Apa hal penting yang wajib dibaca sebelum membeli reksa dana?', opts: ['Komentar media sosial', 'Prospektus dan Fund Fact Sheet', 'Warna logo manajer investasi'], ans: 1, exp: 'Prospektus memuat komposisi aset, risiko, biaya, dan aturan pencairan.' }
+      ],
+      health: [
+        { q: 'Menurut panduan Isi Piringku, berapa porsi sayur dan buah dalam satu piring?', opts: ['Seperempat piring', 'Setengah bagian piring', 'Hanya jika sedang diet'], ans: 1, exp: 'Setengah piring diisi sayur (1/3) dan buah (1/6), setengahnya lagi makanan pokok dan lauk.' },
+        { q: 'Apa tujuan utama menerapkan sleep hygiene?', opts: ['Begadang lebih produktif', 'Membantu tubuh mendapatkan jadwal tidur teratur dan berkualitas', 'Menggantikan kebutuhan olahraga'], ans: 1, exp: 'Sleep hygiene menjaga ritme sirkadian tubuh agar pemulihan fisik dan mental optimal.' },
+        { q: 'Langkah awal terbaik untuk mengurangi perilaku sedentari (terlalu lama duduk)?', opts: ['Langsung lari maraton tanpa latihan', 'Menyisipkan jalan santai 10–15 menit di sela aktivitas', 'Menahan lapar seharian'], ans: 1, exp: 'Konsistensi gerak ringan setiap hari lebih berkelanjutan dibanding olahraga ekstrem sesekali.' }
+      ]
+    };
+
+    const quizState = { fin: { idx: 0, score: 0, answered: false }, health: { idx: 0, score: 0, answered: false } };
+
+    function renderQuiz(type) {
+      const box = document.getElementById(`${type}-quiz-box`);
+      const list = quizData[type];
+      const st = quizState[type];
+      const themeClass = type === 'fin' ? 'btn-pelita' : 'btn-loka';
+      const title = type === 'fin' ? 'Kuis Finansial bersama Pelita' : 'Kuis Kesehatan bersama Loka';
+
+      if (st.idx >= list.length) {
+        const shareText = encodeURIComponent(`Aku baru menyelesaikan ${title} di LokaPelita dengan skor ${st.score}/${list.length}! Coba cek skormu di https://lokapelita.vercel.app/`);
+        box.innerHTML = `
+          <span class="badge ${type === 'fin' ? 'badge-pelita' : 'badge-loka'}">Selesai!</span>
+          <h3>Skor Kamu: ${st.score} dari ${list.length}</h3>
+          <p style="margin-bottom: 16px; color: var(--text-secondary);">Bagus! Setiap langkah kecil memahami konsep dasar membantumu mengambil keputusan lebih tenang.</p>
+          <div class="btn-group">
+            <a href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener noreferrer" class="btn ${themeClass} btn-sm">Bagikan Skor ke WhatsApp</a>
+            <button class="btn btn-outline btn-sm" onclick="navigateTo('konsultasi')">Diskusi Hasil via Konsultasi</button>
+            <button class="btn btn-outline btn-sm" onclick="resetQuiz('${type}')">Ulangi Kuis</button>
+          </div>
+        `;
+        return;
+      }
+
+      const item = list[st.idx];
+      box.innerHTML = `
+        <span class="badge ${type === 'fin' ? 'badge-pelita' : 'badge-loka'}">Pertanyaan ${st.idx + 1} dari ${list.length}</span>
+        <h3>${item.q}</h3>
+        <div style="margin-top: 14px;">
+          ${item.opts.map((opt, i) => `<button class="quiz-option" id="${type}-opt-${i}" onclick="answerQuiz('${type}', ${i})">${opt}</button>`).join('')}
+        </div>
+        <div id="${type}-exp" class="helper-text" style="margin-top: 10px; display:none; padding: 12px; background:#F1F5F9; border-radius:10px;"></div>
+        <div style="margin-top: 16px;">
+          <button class="btn ${themeClass} btn-sm" id="${type}-next" style="display:none;" onclick="nextQuiz('${type}')">Soal Berikutnya →</button>
+        </div>
+      `;
+    }
+
+    function answerQuiz(type, chosen) {
+      const st = quizState[type];
+      if (st.answered) return;
+      st.answered = true;
+      const item = quizData[type][st.idx];
+      if (chosen === item.ans) st.score++;
+
+      item.opts.forEach((_, i) => {
+        const btn = document.getElementById(`${type}-opt-${i}`);
+        if (i === item.ans) btn.classList.add('correct');
+        else if (i === chosen) btn.classList.add('wrong');
+      });
+
+      const expBox = document.getElementById(`${type}-exp`);
+      expBox.innerHTML = `<strong>Penjelasan:</strong> ${item.exp}`;
+      expBox.style.display = 'block';
+      document.getElementById(`${type}-next`).style.display = 'inline-flex';
+    }
+
+    function nextQuiz(type) {
+      quizState[type].idx++;
+      quizState[type].answered = false;
+      renderQuiz(type);
+    }
+
+    function resetQuiz(type) {
+      quizState[type] = { idx: 0, score: 0, answered: false };
+      renderQuiz(type);
+    }
+
+    function calcLifeBalance() {
+      let total = 0;
+      for (let i = 1; i <= 6; i++) {
+        total += parseInt(document.getElementById(`bal-${i}`).value, 10);
+      }
+      let profile = 'Perintis Langkah Kecil';
+      let desc = 'Kamu baru mulai menata ritme. Pilih satu kebiasaan termudah minggu ini untuk dijaga konsisten.';
+      if (total >= 15) {
+        profile = 'Penjaga Keseimbangan Tangguh';
+        desc = 'Fondasi finansial dan kebiasaan sehatmu sudah berjalan beriringan. Pertahankan dan evaluasi berkala!';
+      } else if (total >= 11) {
+        profile = 'Penjelajah Bertumbuh';
+        desc = 'Sebagian kebiasaan baik sudah terbentuk. Tinggal perkuat area yang skornya masih rendah.';
+      }
+      const res = document.getElementById('res-balance');
+      res.innerHTML = `
+        <strong>Profil Kamu: ${profile} (Skor ${total}/18)</strong>
+        <p class="helper-text" style="margin-top:6px;">${desc}</p>
+      `;
+      res.classList.add('show');
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderQuiz('fin');
+      renderQuiz('health');
+      const initialHash = window.location.hash.replace('#', '');
+      if (initialHash && validPages.includes(initialHash)) {
+        navigateTo(initialHash, null, false);
+      }
+    });
+  </script>
+</body>
+</html>
