@@ -5,9 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LokaPelita — Belajar Uang, Rawat Diri</title>
   <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <meta name="description" content="Ruang belajar interaktif keuangan bersama Pelita dan kesehatan bersama Loka. Dilengkapi kalkulator simulasi dana darurat, TVM, FIRE, BMI, kebutuhan air, kuis edukatif, dan konsultasi." />
+  <meta name="keywords" content="LokaPelita, literasi finansial, kalkulator dana darurat, kalkulator TVM, pensiun FIRE, kalkulator BMI, kebutuhan air harian, edukasi kesehatan" />
+  <meta name="author" content="LokaPelita" />
+  <link rel="canonical" href="https://lokapelita.vercel.app/" />
+
+  <!-- Open Graph / WhatsApp / Facebook Preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="LokaPelita" />
+  <meta property="og:url" content="https://lokapelita.vercel.app/" />
   <meta property="og:title" content="LokaPelita — Belajar Uang, Rawat Diri" />
+  <meta property="og:description" content="Simulasi dana darurat, nilai waktu uang, FIRE, BMI, kebutuhan air, hingga kuis interaktif bersama Loka & Pelita." />
   <meta property="og:image" content="https://lokapelita.vercel.app/assets/og-image.png" />
-  <meta name="description" content="Ruang belajar interaktif keuangan bersama Pelita dan kesehatan bersama Loka. Dilengkapi kalkulator simulasi, kuis edukatif, dan konsultasi." />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LokaPelita — Belajar Uang, Rawat Diri" />
+  <meta name="twitter:description" content="Ruang belajar interaktif keuangan bersama Pelita dan kesehatan bersama Loka." />
+  <meta name="twitter:image" content="https://lokapelita.vercel.app/assets/og-image.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -569,6 +586,57 @@
     #page-kesehatan .mod-ill { background: linear-gradient(135deg, #FFF0B3, #FFFFFF); }
     .mod-ill img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
     .module-card.wide .mod-ill { height: 210px; }
+
+    /* ===== Actionable Insight & Share Card ===== */
+    .lp-insight-card {
+      margin-top: 16px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: #FFFFFF;
+      border: 2px solid #E2E8F0;
+      box-shadow: var(--shadow-sm);
+      text-align: left;
+      animation: smoothPageEnter 0.35s ease;
+    }
+    .lp-insight-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .lp-badge-good { background: #DCFCE7; color: #166534; }
+    .lp-badge-warn { background: #FEF3C7; color: #92400E; }
+    .lp-badge-alert { background: #FEE2E2; color: #991B1B; }
+    .lp-insight-why {
+      font-size: 0.92rem;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .lp-insight-steps-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .lp-insight-steps {
+      padding-left: 20px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+    .lp-insight-steps li { margin-bottom: 6px; }
+    .lp-action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .btn-wa { background: #16A34A; color: #FFFFFF; }
+    .btn-wa:hover { background: #15803D; transform: translateY(-1px); }
+    .btn-navy { background: var(--navy); color: #FFFFFF; }
+    .btn-navy:hover { background: #233570; transform: translateY(-1px); }
   </style>
 </head>
 <body>
@@ -891,6 +959,7 @@
           </div>
           <button class="btn btn-pelita" onclick="calcEmergencyFund()">Hitung Target</button>
           <div id="res-darurat" class="result-box"></div>
+          <div id="insight-darurat"></div>
         </div>
       </div>
 
@@ -918,6 +987,7 @@
           </div>
           <button class="btn btn-pelita" onclick="calcTVM()">Hitung Nilai Uang</button>
           <div id="res-tvm" class="result-box"></div>
+          <div id="insight-tvm"></div>
         </div>
       </div>
 
@@ -941,6 +1011,7 @@
           </div>
           <button class="btn btn-pelita" onclick="calcFIRE()">Hitung Target FIRE</button>
           <div id="res-fire" class="result-box"></div>
+          <div id="insight-fire"></div>
         </div>
       </div>
 
@@ -960,6 +1031,7 @@
           </div>
           <button class="btn btn-loka" onclick="calcBMI()">Hitung BMI</button>
           <div id="res-bmi" class="result-box loka"></div>
+          <div id="insight-bmi"></div>
         </div>
       </div>
 
@@ -984,6 +1056,7 @@
           </div>
           <button class="btn btn-loka" onclick="calcWater()">Hitung Kebutuhan Air</button>
           <div id="res-air" class="result-box loka"></div>
+          <div id="insight-air"></div>
         </div>
       </div>
     </section>
@@ -1065,6 +1138,7 @@
           </div>
           <button class="btn btn-pelita" onclick="calcLifeBalance()">Lihat Profilku</button>
           <div id="res-balance" class="result-box"></div>
+          <div id="insight-balance"></div>
         </div>
       </div>
     </section>
@@ -1206,6 +1280,9 @@
       const res = document.getElementById(resId);
       res.innerHTML = '<strong>Lengkapi dulu kolom yang kosong</strong><p class="helper-text" style="margin-top:6px;">Isi semua kolom yang diminta, lalu tekan tombol hitung lagi.</p>';
       res.classList.add('show');
+      const insId = resId.replace('res-', 'insight-');
+      const insEl = document.getElementById(insId);
+      if (insEl) insEl.innerHTML = '';
     }
 
     function readNums(resId, ids, optional) {
@@ -1227,13 +1304,33 @@
       const exp = v['ed-expense'];
       const minM = status === 'single' ? 3 : 6;
       const maxM = status === 'single' ? 6 : 12;
+      const rangeText = `${formatRp(exp * minM)} – ${formatRp(exp * maxM)}`;
       const res = document.getElementById('res-darurat');
       res.innerHTML = `
         <strong>Target Cadangan (${minM}–${maxM} bulan):</strong><br>
-        <span style="font-size:1.25rem; font-weight:800; color:var(--pelita-primary);">${formatRp(exp * minM)} – ${formatRp(exp * maxM)}</span>
+        <span style="font-size:1.25rem; font-weight:800; color:var(--pelita-primary);">${rangeText}</span>
         <p class="helper-text" style="margin-top:6px;">Simpan di rekening terpisah atau reksa dana pasar uang yang mudah dicairkan.</p>
       `;
       res.classList.add('show');
+
+      renderCalcInsight('insight-darurat', {
+        theme: 'pelita',
+        level: 'good',
+        pill: 'SIMULASI DANA DARURAT',
+        sub: 'bersama Pelita',
+        category: 'Target Dana Darurat',
+        mainVal: `${minM}–${maxM} Bulan`,
+        statusLabel: status === 'single' ? 'Profil Lajang (3–6x Pengeluaran)' : 'Profil Menikah (6–12x Pengeluaran)',
+        note: `Target ideal: ${rangeText}`,
+        why: 'Dana darurat mencegah kamu berutang atau mencairkan investasi di waktu yang salah saat terjadi kondisi mendesak seperti sakit atau penurunan penghasilan.',
+        steps: [
+          'Buka rekening terpisah tanpa kartu debit harian atau gunakan Reksa Dana Pasar Uang agar likuid namun tidak terpakai impulsif.',
+          'Terapkan autodebet minimal 10%–20% dari gaji bulanan untuk mencicil target minimal ' + formatRp(exp * minM) + ' terlebih dahulu.',
+          'Evaluasi ulang nominal setiap tahun atau saat ada perubahan jumlah tanggungan keluarga.'
+        ],
+        targetPage: 'finansial',
+        targetBtnLabel: 'Pelajari Materi Dana Darurat'
+      });
     }
 
     function calcTVM() {
@@ -1258,6 +1355,25 @@
         <p class="helper-text" style="margin-top:6px;">Total pokok disetor: ${formatRp(totalPrincipal)} · Estimasi pertumbuhan: ${formatRp(fv - totalPrincipal)}</p>
       `;
       res.classList.add('show');
+
+      renderCalcInsight('insight-tvm', {
+        theme: 'pelita',
+        level: 'good',
+        pill: 'NILAI WAKTU UANG',
+        sub: 'bersama Pelita',
+        category: `Simulasi Investasi ${years} Tahun`,
+        mainVal: formatRp(fv),
+        statusLabel: `Asumsi Imbal Hasil ${v['tvm-rate']}% / tahun`,
+        note: `Total pokok disetor: ${formatRp(totalPrincipal)}`,
+        why: 'Konsistensi setoran rutin dan efek bunga majemuk membantu nilai uangmu bertumbuh melampaui inflasi dalam jangka panjang.',
+        steps: [
+          'Pastikan dana darurat sudah aman sebelum mengalokasikan setoran rutin ke instrumen investasi jangka menengah/panjang.',
+          'Sesuaikan profil risiko instrumen (Pasar Uang, Obligasi, atau Saham) dengan horizon waktu ' + years + ' tahun.',
+          'Baca prospektus & Fund Fact Sheet secara berkala dan lakukan rebalancing portofolio setiap 6–12 bulan.'
+        ],
+        targetPage: 'finansial',
+        targetBtnLabel: 'Pelajari Materi Investasi'
+      });
     }
 
     function calcFIRE() {
@@ -1274,6 +1390,25 @@
         <p class="helper-text" style="margin-top:6px;">Kebutuhan bersih dari portofolio: ${formatRp(netAnnual)}/tahun dengan tingkat penarikan ${(swr * 100).toFixed(1)}%.</p>
       `;
       res.classList.add('show');
+
+      renderCalcInsight('insight-fire', {
+        theme: 'pelita',
+        level: 'good',
+        pill: 'RENCANA PENSIUN FIRE',
+        sub: 'bersama Pelita',
+        category: 'Target Dana Pensiun FIRE',
+        mainVal: formatRp(fireTarget),
+        statusLabel: `Safe Withdrawal Rate ${(swr * 100).toFixed(1)}%`,
+        note: `Kebutuhan bersih: ${formatRp(netAnnual)}/tahun`,
+        why: 'Mengetahui angka target pensiun membuatmu bisa mengukur jarak antara kondisi keuangan saat ini dengan kemandirian finansial di masa depan.',
+        steps: [
+          'Pisahkan rekening/portofolio khusus dana pensiun dari tabungan tujuan jangka pendek agar tidak terpakai.',
+          'Perhitungkan faktor inflasi tahunan saat meninjau ulang estimasi pengeluaran bulanan saat pensiun.',
+          'Pastikan proteksi kesehatan (JKN/asuransi kesehatan) sudah disiapkan agar biaya medis masa tua tidak menggerus portofolio.'
+        ],
+        targetPage: 'finansial',
+        targetBtnLabel: 'Pelajari Perencanaan Pensiun'
+      });
     }
 
     function calcBMI() {
@@ -1281,11 +1416,45 @@
       if (!v) return;
       const h = v['bmi-height'] / 100, w = v['bmi-weight'];
       const bmi = w / (h * h);
-      let cat = 'Normal';
-      if (bmi < 18.5) cat = 'Berat badan kurang';
-      else if (bmi < 25) cat = 'Normal';
-      else if (bmi < 27) cat = 'Berat badan berlebih';
-      else cat = 'Obesitas';
+      let cat = 'Normal', lvl = 'good', whyTxt = '', stepsList = [];
+
+      if (bmi < 18.5) {
+        cat = 'Berat badan kurang';
+        lvl = 'warn';
+        whyTxt = 'Berat badan di bawah rentang normal dapat memengaruhi daya tahan tubuh, massa otot, dan tingkat energi harian.';
+        stepsList = [
+          'Tingkatkan asupan kalori bergizi dari sumber protein (telur, ikan, ayam, tempe) dan lemak sehat.',
+          'Makan dalam porsi sedang namun lebih sering (4–5 kali sehari termasuk camilan sehat).',
+          'Tambahkan latihan kekuatan otot ringan secara bertahap untuk membantu membentuk massa tubuh ideal.'
+        ];
+      } else if (bmi < 25) {
+        cat = 'Normal (Ideal)';
+        lvl = 'good';
+        whyTxt = 'Rentang BMI ideal membantu menjaga keseimbangan metabolisme, kebugaran jantung, dan energi optimal untuk aktivitas sehari-hari.';
+        stepsList = [
+          'Pertahankan komposisi makan seimbang mengacu pada panduan Isi Piringku setiap hari.',
+          'Jaga konsistensi aktivitas fisik minimal 150 menit per minggu (seperti jalan cepat atau bersepeda).',
+          'Pantau berat badan dan lingkar pinggang sebulan sekali sebagai evaluasi rutin.'
+        ];
+      } else if (bmi < 27) {
+        cat = 'Berat badan berlebih';
+        lvl = 'warn';
+        whyTxt = 'Kelebihan berat badan meningkatkan beban kerja sendi dan risiko gangguan metabolik jika dibiarkan dalam jangka panjang.';
+        stepsList = [
+          'Kurangi minuman manis kemasan dan ganti dengan air putih sesuai target hidrasi harianmu.',
+          'Mulai jalan cepat 25–30 menit sebanyak 4 kali seminggu tanpa perlu olahraga ekstrem langsung.',
+          'Terapkan porsi Isi Piringku: isi setengah piring dengan sayur dan buah sebelum mengambil karbohidrat.'
+        ];
+      } else {
+        cat = 'Obesitas';
+        lvl = 'alert';
+        whyTxt = 'Kategori obesitas berkaitan erat dengan peningkatan risiko tekanan darah tinggi, gula darah, dan kelelahan kronis.';
+        stepsList = [
+          'Mulai defisit kalori ringan secara bertahap dengan membatasi makanan ultra-proses dan gorengan berlebih.',
+          'Pilih aktivitas fisik low-impact seperti jalan kaki santai atau berenang agar aman bagi persendian.',
+          'Konsultasikan rencana penurunan berat badan yang aman bersama dokter atau ahli gizi.'
+        ];
+      }
 
       const res = document.getElementById('res-bmi');
       res.innerHTML = `
@@ -1293,6 +1462,21 @@
         <p class="helper-text" style="margin-top:6px;">Gunakan sebagai gambaran awal. Bicarakan dengan tenaga kesehatan untuk penilaian komposisi tubuh menyeluruh.</p>
       `;
       res.classList.add('show');
+
+      renderCalcInsight('insight-bmi', {
+        theme: 'loka',
+        level: lvl,
+        pill: 'CEK BMI KESEHATAN',
+        sub: 'bersama Loka',
+        category: 'Indeks Massa Tubuh (BMI)',
+        mainVal: bmi.toFixed(1),
+        statusLabel: cat,
+        note: `Tinggi ${v['bmi-height']} cm · Berat ${w} kg`,
+        why: whyTxt,
+        steps: stepsList,
+        targetPage: 'kesehatan',
+        targetBtnLabel: 'Pelajari Pola Makan & Gerak'
+      });
     }
 
     function calcWater() {
@@ -1300,12 +1484,33 @@
       if (!v) return;
       const w = v['water-weight'], mult = v['water-act'];
       const ml = w * mult;
+      const literStr = `${(ml / 1000).toFixed(2)} Liter`;
+      const gelas = Math.round(ml / 250);
       const res = document.getElementById('res-air');
       res.innerHTML = `
-        <strong>Perkiraan Kebutuhan Air: ${ml.toLocaleString('id-ID')} ml / hari</strong> (${(ml / 1000).toFixed(2)} liter)
-        <p class="helper-text" style="margin-top:6px;">Setara sekitar ${Math.round(ml / 250)} gelas ukuran 250 ml.</p>
+        <strong>Perkiraan Kebutuhan Air: ${ml.toLocaleString('id-ID')} ml / hari</strong> (${literStr})
+        <p class="helper-text" style="margin-top:6px;">Setara sekitar ${gelas} gelas ukuran 250 ml.</p>
       `;
       res.classList.add('show');
+
+      renderCalcInsight('insight-air', {
+        theme: 'loka',
+        level: 'good',
+        pill: 'TARGET HIDRASI HARIAN',
+        sub: 'bersama Loka',
+        category: 'Kebutuhan Air Harian',
+        mainVal: literStr,
+        statusLabel: `Sekitar ${gelas} Gelas (250 ml) / Hari`,
+        note: `Total ${ml.toLocaleString('id-ID')} ml untuk berat ${w} kg`,
+        why: 'Hidrasi yang cukup menjaga fokus pikiran, melancarkan pencernaan, mengatur suhu tubuh, dan mencegah sakit kepala akibat dehidrasi ringan.',
+        steps: [
+          'Minum 1–2 gelas air putih segera setelah bangun tidur untuk mengganti cairan tubuh selama malam hari.',
+          'Siapkan botol minum takar di meja kerja agar mudah memantau target ' + gelas + ' gelas hingga sore hari.',
+          'Pantau warna urine sebagai indikator alami: kuning pucat menandakan tubuh terhidrasi dengan baik.'
+        ],
+        targetPage: 'kesehatan',
+        targetBtnLabel: 'Pelajari Kebiasaan Sehat Loka'
+      });
     }
 
     // ==================== KUIS INTERAKTIF & SKOR ====================
@@ -1522,12 +1727,15 @@
         total += parseInt(document.getElementById(`bal-${i}`).value, 10);
       }
       let profile = 'Perintis Langkah Kecil';
+      let lvl = 'warn';
       let desc = 'Kamu baru mulai menata ritme. Pilih satu kebiasaan termudah minggu ini untuk dijaga konsisten.';
       if (total >= 15) {
         profile = 'Penjaga Keseimbangan Tangguh';
+        lvl = 'good';
         desc = 'Fondasi finansial dan kebiasaan sehatmu sudah berjalan beriringan. Pertahankan dan evaluasi berkala!';
       } else if (total >= 11) {
         profile = 'Penjelajah Bertumbuh';
+        lvl = 'good';
         desc = 'Sebagian kebiasaan baik sudah terbentuk. Tinggal perkuat area yang skornya masih rendah.';
       }
       const res = document.getElementById('res-balance');
@@ -1536,6 +1744,157 @@
         <p class="helper-text" style="margin-top:6px;">${desc}</p>
       `;
       res.classList.add('show');
+
+      renderCalcInsight('insight-balance', {
+        theme: 'pelita',
+        level: lvl,
+        pill: 'SKOR KESEIMBANGAN HIDUP',
+        sub: 'Loka & Pelita',
+        category: 'Profil Keseimbangan Hidup',
+        mainVal: `${total} / 18`,
+        statusLabel: profile,
+        note: 'Evaluasi kebiasaan finansial & kesehatan harian',
+        why: 'Kesehatan fisik dan kestabilan finansial saling menopang: tubuh bugar menjaga produktivitas, sementara keuangan rapi menurunkan stres harian.',
+        steps: [
+          'Pilih 1 skor terendah dari 6 pertanyaan di atas sebagai fokus perbaikan selama 7 hari ke depan.',
+          'Gunakan kalkulator simulasi LokaPelita untuk mengukur target konkret (dana darurat atau kebutuhan air).',
+          'Ulangi pengecekan skor ini bulan depan untuk melihat progres kebiasaanmu.'
+        ],
+        targetPage: 'beranda',
+        targetBtnLabel: 'Kembali ke Ruang Belajar'
+      });
+    }
+
+
+    // ==================== ACTIONABLE INSIGHT & SHAREABLE RESULT CARD (KALKULATOR) ====================
+    const calcCardStore = {};
+
+    function renderCalcInsight(containerId, cfg) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      const badgeClass =
+        cfg.level === 'good' ? 'lp-badge-good' :
+        cfg.level === 'warn' ? 'lp-badge-warn' : 'lp-badge-alert';
+
+      const stepsHtml = cfg.steps.map(s => `<li>${s}</li>`).join('');
+      const waText = encodeURIComponent(
+        `Halo! Aku baru saja cek *${cfg.category}* di LokaPelita.
+
+📊 Hasil: *${cfg.mainVal}*
+🏷️ Status: *${cfg.statusLabel}*
+
+Coba cek kondisi finansial & kesehatanmu juga di ${SITE}`
+      );
+
+      container.innerHTML = `
+        <div class="lp-insight-card">
+          <span class="lp-insight-badge ${badgeClass}">${cfg.statusLabel}</span>
+          <p class="lp-insight-why"><strong>Mengapa ini penting:</strong> ${cfg.why}</p>
+          <p class="lp-insight-steps-title">3 Langkah Konkret Berikutnya:</p>
+          <ol class="lp-insight-steps">${stepsHtml}</ol>
+          <div class="lp-action-row">
+            <button type="button" class="btn ${cfg.theme === 'loka' ? 'btn-loka' : 'btn-pelita'} btn-sm" onclick="navigateTo('${cfg.targetPage}')">
+              📚 ${cfg.targetBtnLabel} →
+            </button>
+            <button type="button" class="btn btn-navy btn-sm" onclick="downloadCalcCard('${containerId}')">
+              📥 Simpan Kartu Hasil
+            </button>
+            <a class="btn btn-wa btn-sm" href="https://wa.me/?text=${waText}" target="_blank" rel="noopener noreferrer">
+              💬 Bagikan ke WA
+            </a>
+          </div>
+          <p class="share-note" id="${containerId}-note"></p>
+        </div>
+      `;
+
+      // Pre-render 1080x1920 PNG card in background for instant download
+      drawCalcCard(cfg).then(cv => {
+        calcCardStore[containerId] = { cv, category: cfg.category };
+      });
+    }
+
+    async function drawCalcCard(cfg) {
+      try { await document.fonts.load('800 100px "Plus Jakarta Sans"'); await document.fonts.load('600 40px "Plus Jakarta Sans"'); } catch (e) {}
+      const ld = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.onerror = () => r(null); i.src = src; });
+      const logo = (await ld(LOGO_URI)) || (await ld("assets/logo-lokapelita.webp"));
+
+      const W = 1080, H = 1920, c = document.createElement("canvas");
+      c.width = W; c.height = H;
+      const x = c.getContext("2d"), F = '"Plus Jakarta Sans", Arial, sans-serif', NAVY = "#17244F";
+      const accent = cfg.theme === 'loka' ? '#FFC21A' : '#2563EB';
+      const ink = cfg.theme === 'loka' ? '#17244F' : '#FFFFFF';
+
+      const g = x.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, "#FFD24D"); g.addColorStop(0.45, "#FFF1BF"); g.addColorStop(0.75, "#DCEBFF"); g.addColorStop(1, "#9CC3FF");
+      x.fillStyle = g; x.fillRect(0, 0, W, H);
+
+      const dot = (a, b, r, col) => { x.fillStyle = col; x.beginPath(); x.arc(a, b, r, 0, Math.PI * 2); x.fill(); };
+      dot(960, 110, 230, "#A9CBFF"); dot(90, 1830, 270, "#FFD863");
+
+      const rect = (a, b, w, h, r) => { x.beginPath(); if (x.roundRect) x.roundRect(a, b, w, h, r); else x.rect(a, b, w, h); };
+      x.save(); x.shadowColor = "rgba(23,36,79,.28)"; x.shadowBlur = 60; x.shadowOffsetY = 24; x.fillStyle = "#fff"; rect(70, 150, 940, 1620, 64); x.fill(); x.restore();
+
+      x.fillStyle = accent; x.save(); rect(70, 150, 940, 1620, 64); x.clip(); x.fillRect(70, 150, 940, 22); x.restore();
+      x.textAlign = "center";
+
+      if (logo) { const w = 420, h = w * logo.height / logo.width; x.drawImage(logo, 540 - w / 2, 190, w, h); }
+
+      // Pill badge
+      x.font = "800 36px " + F; const pw = x.measureText(cfg.pill).width + 80;
+      x.fillStyle = accent; rect(540 - pw / 2, 650, pw, 68, 34); x.fill();
+      x.fillStyle = ink; x.fillText(cfg.pill, 540, 697);
+
+      x.fillStyle = NAVY; x.font = "700 44px " + F; x.fillText(cfg.sub, 540, 780);
+
+      // Highlight box for result
+      x.fillStyle = cfg.theme === 'loka' ? '#FFFBEA' : '#EFF6FF';
+      rect(130, 840, 820, 360, 36); x.fill();
+      x.strokeStyle = accent; x.lineWidth = 6; rect(130, 840, 820, 360, 36); x.stroke();
+
+      x.fillStyle = "#4B5675"; x.font = "700 36px " + F; x.fillText(cfg.category, 540, 920);
+
+      let fs = 96; x.font = "800 " + fs + "px " + F;
+      while (x.measureText(cfg.mainVal).width > 740 && fs > 48) { fs -= 4; x.font = "800 " + fs + "px " + F; }
+      x.fillStyle = NAVY; x.fillText(cfg.mainVal, 540, 1045);
+
+      x.fillStyle = "#8A5A00"; x.font = "700 34px " + F; x.fillText(cfg.statusLabel, 540, 1135);
+
+      // Sub note
+      x.fillStyle = "#4B5675"; x.font = "600 32px " + F; x.fillText(cfg.note, 540, 1280);
+
+      // 3 Action bullets summary
+      x.textAlign = "left";
+      x.fillStyle = NAVY; x.font = "800 32px " + F; x.fillText("Langkah Aksi:", 140, 1365);
+      x.fillStyle = "#334155"; x.font = "500 28px " + F;
+      cfg.steps.slice(0, 2).forEach((step, idx) => {
+        const clean = step.length > 52 ? step.slice(0, 49) + "..." : step;
+        x.fillText("• " + clean, 140, 1415 + idx * 45);
+      });
+
+      // Footer CTA
+      x.textAlign = "center";
+      x.fillStyle = "#4B5675"; x.font = "500 36px " + F; x.fillText("Coba simulasi & kuis gratis di", 540, 1655);
+      x.fillStyle = NAVY; x.font = "800 50px " + F; x.fillText("lokapelita.vercel.app", 540, 1720);
+      x.fillStyle = NAVY; x.font = "600 34px " + F; x.fillText("@lokapelitafinancial  ·  @lokapelitahealth", 540, 1850);
+      return c;
+    }
+
+    function downloadCalcCard(containerId) {
+      const item = calcCardStore[containerId];
+      const noteEl = document.getElementById(`${containerId}-note`);
+      if (!item || !item.cv) {
+        if (noteEl) noteEl.textContent = "Gambar sedang disiapkan, silakan klik sekali lagi.";
+        return;
+      }
+      const slug = item.category.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      const a = document.createElement("a");
+      a.href = item.cv.toDataURL("image/png");
+      a.download = `hasil-${slug}-lokapelita.png`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      if (noteEl) noteEl.textContent = "Kartu hasil tersimpan! Siap diunggah ke Instagram Story atau WhatsApp Status.";
     }
 
     // Initialize on load
