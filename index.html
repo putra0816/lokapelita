@@ -579,8 +579,41 @@
     .hero-logo { display: block; width: 128px; height: auto; margin: 0 0 8px; filter: drop-shadow(0 6px 10px rgba(23,36,79,.2)); }
     .foot-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
     .foot-brand img { width: 52px; height: 52px; object-fit: contain; }
-    .pyramid { display: block; width: 100%; max-width: 620px; height: auto; margin: 0 auto; border-radius: 14px; border: 2px solid #fff; background: #fff; box-shadow: var(--shadow-sm); }
-    @media (min-width: 760px) { .module-card.wide { grid-column: span 2; } }
+    .pyramid-wrap {
+      background: #FFFFFF;
+      border: 2px solid #DBEAFE;
+      border-radius: 16px;
+      padding: 14px;
+      margin: 4px 0;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .pyramid {
+      display: block;
+      width: 100%;
+      max-width: 480px;
+      max-height: 290px;
+      object-fit: contain;
+      height: auto;
+      margin: 0 auto;
+      border-radius: 10px;
+      background: #fff;
+    }
+    .pyramid-caption {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 8px;
+      font-weight: 600;
+    }
+    #page-finansial .modules-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
+    }
+    @media (max-width: 820px) {
+      #page-finansial .modules-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
     .mod-ill { height: 180px; border-radius: 16px; padding: 10px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #E3EEFF, #FFFFFF); }
     #page-kesehatan .mod-ill { background: linear-gradient(135deg, #FFF0B3, #FFFFFF); }
@@ -757,13 +790,16 @@
 
       <div class="modules-grid">
         <!-- 01 Anggaran -->
-        <article class="module-card wide">
+        <article class="module-card">
           <div class="mod-ill"><img src="assets/ill-anggaran.webp" alt="Loka dan Pelita menghitung anggaran" loading="lazy"></div>
           <span class="module-num">01 · ANGGARAN</span>
           <h3>Gajian lewat, saldo ikut lewat?</h3>
           <p style="font-size: 0.92rem;">Catat uang masuk dan keluar selama satu minggu. Tandai pengeluaran wajib seperti makan dan transportasi, lalu pisahkan pengeluaran yang bisa ditunda.</p>
           <div class="action-tip"><strong>Coba hari ini:</strong> pilih satu pengeluaran yang ingin dibatasi minggu depan dan pantau hasilnya setelah 7 hari.</div>
-          <img class="pyramid" src="assets/piramida-keuangan.webp" alt="Piramida keuangan dari bawah ke atas: arus kas, kredit, dan dana darurat; manajemen risiko dan asuransi; investasi dan tujuan keuangan; dana pensiun dan penghasilan pasif; waris dan hibah" loading="lazy">
+          <div class="pyramid-wrap">
+            <img class="pyramid" src="assets/piramida-keuangan.webp" alt="Piramida keuangan dari bawah ke atas: arus kas, kredit, dan dana darurat; manajemen risiko dan asuransi; investasi dan tujuan keuangan; dana pensiun dan penghasilan pasif; waris dan hibah" loading="lazy">
+            <p class="pyramid-caption">Fondasi paling bawah dimulai dari Arus Kas &amp; Dana Darurat sebelum naik ke Proteksi &amp; Investasi.</p>
+          </div>
           <div class="ref-list">
             <span>Referensi belajar:</span>
             <ul>
@@ -1086,57 +1122,99 @@
       <!-- Skor Keseimbangan Hidup -->
       <div id="sub-quiz-balance" class="sub-panel">
         <div class="calc-card">
-          <span class="badge badge-neutral">Refleksi 6 Pertanyaan</span>
+          <span class="badge badge-neutral">Refleksi 10 Pertanyaan · Pelita &amp; Loka</span>
           <h3>Cek Skor Keseimbangan Hidupmu</h3>
-          <div class="form-group">
-            <label>1. Seberapa rutin kamu mencatat pengeluaran bulanan?</label>
-            <select id="bal-1" class="form-control">
-              <option value="1">Hampir tidak pernah</option>
-              <option value="2">Kadang-kadang</option>
-              <option value="3">Rutin tiap bulan</option>
-            </select>
+          <p class="helper-text" style="margin-bottom: 18px;">5 kebiasaan finansial bersama Pelita dan 5 kebiasaan sehat bersama Loka untuk memetakan keseimbangan hidupmu.</p>
+
+          <div style="padding: 14px 16px; background: var(--pelita-soft); border-radius: 14px; border: 1px solid var(--pelita-light); margin-bottom: 18px;">
+            <span class="badge badge-pelita" style="margin-bottom: 10px;">Bagian 1 · Pilar Finansial Pelita (5 Soal)</span>
+            <div class="form-group">
+              <label for="bal-1">1. Seberapa rutin kamu mencatat atau memantau pengeluaran bulanan?</label>
+              <select id="bal-1" class="form-control">
+                <option value="1">Hampir tidak pernah</option>
+                <option value="2">Kadang-kadang</option>
+                <option value="3">Rutin setiap bulan</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bal-2">2. Bagaimana kondisi cicilan utangmu dibanding penghasilan bulanan?</label>
+              <select id="bal-2" class="form-control">
+                <option value="1">Cicilan di atas 35% penghasilan / terasa berat</option>
+                <option value="2">Ada cicilan sekitar 20%–35% penghasilan</option>
+                <option value="3">Aman (di bawah 20% atau tidak ada utang konsumtif)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bal-3">3. Bagaimana kesiapan dana daruratmu saat ini?</label>
+              <select id="bal-3" class="form-control">
+                <option value="1">Belum memiliki dana darurat terpisah</option>
+                <option value="2">Ada, namun masih di bawah target 3–6 bulan</option>
+                <option value="3">Sudah terpenuhi minimal 3–6 bulan pengeluaran</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bal-4">4. Sudahkah kamu mengecek manfaat perlindungan kesehatan/jiwa (JKN atau asuransi)?</label>
+              <select id="bal-4" class="form-control">
+                <option value="1">Belum punya atau belum pernah cek manfaatnya</option>
+                <option value="2">Sudah punya, tapi belum paham detail pengecualiannya</option>
+                <option value="3">Sudah punya dan paham manfaat serta batas perlindungannya</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="bal-5">5. Apakah kamu sudah rutin menyisihkan dana untuk investasi atau masa pensiun?</label>
+              <select id="bal-5" class="form-control">
+                <option value="1">Belum mulai menyisihkan</option>
+                <option value="2">Sesekali kalau ada sisa uang akhir bulan</option>
+                <option value="3">Rutin disisihkan di awal gajian sesuai tujuan</option>
+              </select>
+            </div>
           </div>
-          <div class="form-group">
-            <label>2. Bagaimana dana daruratmu saat ini?</label>
-            <select id="bal-2" class="form-control">
-              <option value="1">Belum ada</option>
-              <option value="2">Ada, kurang dari 3 bulan pengeluaran</option>
-              <option value="3">Sudah 3 bulan pengeluaran atau lebih</option>
-            </select>
+
+          <div style="padding: 14px 16px; background: var(--loka-soft); border-radius: 14px; border: 1px solid var(--loka-light); margin-bottom: 18px;">
+            <span class="badge badge-loka" style="margin-bottom: 10px;">Bagian 2 · Pilar Kesehatan Loka (5 Soal)</span>
+            <div class="form-group">
+              <label for="bal-6">6. Seberapa sering kamu bergerak aktif atau berolahraga dalam seminggu?</label>
+              <select id="bal-6" class="form-control">
+                <option value="1">Hampir tidak pernah (banyak duduk)</option>
+                <option value="2">1–2 kali per minggu</option>
+                <option value="3">3 kali atau lebih per minggu (≥150 menit)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bal-7">7. Seberapa sering piring makanmu mengikuti panduan gizi seimbang (Isi Piringku)?</label>
+              <select id="bal-7" class="form-control">
+                <option value="1">Jarang makan sayur dan buah</option>
+                <option value="2">Kadang-kadang dalam sehari</option>
+                <option value="3">Hampir setiap kali makan utama</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bal-8">8. Bagaimana kebiasaan minum air putihmu setiap hari?</label>
+              <select id="bal-8" class="form-control">
+                <option value="1">Sering kurang minum &amp; lebih sering minuman manis</option>
+                <option value="2">Cukup minum kalau ingat saja</option>
+                <option value="3">Rutin memenuhi target hidrasi harian (≈2 liter)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bal-9">9. Bagaimana durasi dan keteraturan jadwal tidurmu?</label>
+              <select id="bal-9" class="form-control">
+                <option value="1">Sering kurang dari 6 jam atau begadang</option>
+                <option value="2">Kadang cukup, namun jam tidur masih berubah-ubah</option>
+                <option value="3">Umumnya 7–9 jam dengan jadwal yang teratur</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="bal-10">10. Bagaimana caramu mengelola stres saat beban pikiran terasa berat?</label>
+              <select id="bal-10" class="form-control">
+                <option value="1">Sering memendam sendiri hingga sulit istirahat</option>
+                <option value="2">Sesekali ambil jeda, meski masih sering kewalahan</option>
+                <option value="3">Punya rutinitas jeda sehat, bercerita, atau cari bantuan bila perlu</option>
+              </select>
+            </div>
           </div>
-          <div class="form-group">
-            <label>3. Sudah mengecek manfaat perlindungan (JKN/asuransi)?</label>
-            <select id="bal-3" class="form-control">
-              <option value="1">Belum</option>
-              <option value="2">Sebagian</option>
-              <option value="3">Sudah paham detailnya</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>4. Seberapa sering kamu bergerak atau berolahraga?</label>
-            <select id="bal-4" class="form-control">
-              <option value="1">Hampir tidak pernah</option>
-              <option value="2">1–2 kali per minggu</option>
-              <option value="3">3 kali atau lebih per minggu</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>5. Bagaimana pola tidurmu?</label>
-            <select id="bal-5" class="form-control">
-              <option value="1">Sering kurang dari 6 jam</option>
-              <option value="2">Kadang tidak teratur</option>
-              <option value="3">Umumnya 7–9 jam dan teratur</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>6. Seberapa sering piringmu berisi sayur dan buah?</label>
-            <select id="bal-6" class="form-control">
-              <option value="1">Jarang</option>
-              <option value="2">Kadang-kadang</option>
-              <option value="3">Hampir setiap makan</option>
-            </select>
-          </div>
-          <button class="btn btn-pelita" onclick="calcLifeBalance()">Lihat Profilku</button>
+
+          <button class="btn btn-pelita" onclick="calcLifeBalance()">Lihat Profil &amp; Skor Keseimbangan</button>
           <div id="res-balance" class="result-box"></div>
           <div id="insight-balance"></div>
         </div>
@@ -1722,46 +1800,101 @@
     }
 
     function calcLifeBalance() {
-      let total = 0;
-      for (let i = 1; i <= 6; i++) {
-        total += parseInt(document.getElementById(`bal-${i}`).value, 10);
-      }
-      let profile = 'Perintis Langkah Kecil';
+      const habitMeta = [
+        { id: 'bal-1', area: 'Finansial', label: 'Pencatatan Anggaran Bulanan', page: 'finansial', btn: 'Pelajari Modul Anggaran', tip: 'Catat pemasukan dan pengeluaran harian selama 7 hari ke depan untuk memetakan pos bocor halus.' },
+        { id: 'bal-2', area: 'Finansial', label: 'Pengendalian Cicilan Utang', page: 'finansial', btn: 'Pelajari Modul Anggaran', tip: 'Jaga rasio cicilan maksimal 30% dari penghasilan dan prioritaskan pelunasan utang berbunga tinggi.' },
+        { id: 'bal-3', area: 'Finansial', label: 'Kesiapan Dana Darurat', page: 'simulasi', btn: 'Hitung Target Dana Darurat', tip: 'Pisahkan rekening dana darurat dan mulai autodebet minimal 10% di awal gajian.' },
+        { id: 'bal-4', area: 'Finansial', label: 'Pemahaman Proteksi & Asuransi', page: 'finansial', btn: 'Pelajari Modul Asuransi', tip: 'Periksa kembali status aktif JKN serta ringkasan manfaat dan pengecualian polis yang dimiliki.' },
+        { id: 'bal-5', area: 'Finansial', label: 'Investasi & Dana Pensiun', page: 'simulasi', btn: 'Simulasi Nilai Waktu Uang', tip: 'Sisihkan dana investasi di awal gajian pada instrumen yang sesuai dengan jangka waktu tujuanmu.' },
+        { id: 'bal-6', area: 'Kesehatan', label: 'Aktivitas Fisik Rutin', page: 'kesehatan', btn: 'Pelajari Modul Aktivitas Fisik', tip: 'Mulai jalan kaki santai 15–20 menit setiap hari atau 30 menit sebanyak 5 kali seminggu.' },
+        { id: 'bal-7', area: 'Kesehatan', label: 'Pola Makan Isi Piringku', page: 'kesehatan', btn: 'Pelajari Panduan Pola Makan', tip: 'Isi setengah piring makanmu dengan sayur dan buah sebelum mengambil nasi dan lauk.' },
+        { id: 'bal-8', area: 'Kesehatan', label: 'Kecukupan Hidrasi Harian', page: 'simulasi', btn: 'Hitung Kebutuhan Air Harian', tip: 'Siapkan botol minum takar di meja kerja dan kurangi minuman manis kemasan.' },
+        { id: 'bal-9', area: 'Kesehatan', label: 'Keteraturan Jadwal Tidur', page: 'kesehatan', btn: 'Pelajari Rutinitas Malam', tip: 'Tetapkan jam tidur yang sama setiap malam dan kurangi layar gawai 30 menit sebelumnya.' },
+        { id: 'bal-10', area: 'Kesehatan', label: 'Pengelolaan Stres & Mental', page: 'kesehatan', btn: 'Pelajari Kesehatan Mental', tip: 'Ambil jeda napas sejenak saat tertekan dan bicarakan beban pikiranmu dengan orang tepercaya.' }
+      ];
+
+      let finScore = 0, healthScore = 0;
+      const weakHabits = [];
+
+      habitMeta.forEach((item, idx) => {
+        const val = parseInt(document.getElementById(item.id).value, 10);
+        if (idx < 5) finScore += val;
+        else healthScore += val;
+        if (val === 1) weakHabits.push(item);
+      });
+
+      const total = finScore + healthScore;
+      const finPct = Math.round((finScore / 15) * 100);
+      const healthPct = Math.round((healthScore / 15) * 100);
+
+      let profile = 'Perintis Langkah Awal';
       let lvl = 'warn';
-      let desc = 'Kamu baru mulai menata ritme. Pilih satu kebiasaan termudah minggu ini untuk dijaga konsisten.';
-      if (total >= 15) {
+      let desc = 'Fondasi finansial dan kebiasaan sehatmu masih dalam tahap awal. Fokus pada 1–2 kebiasaan termudah minggu ini.';
+      let themeChoice = 'pelita';
+
+      if (finScore >= 12 && healthScore >= 12) {
         profile = 'Penjaga Keseimbangan Tangguh';
         lvl = 'good';
-        desc = 'Fondasi finansial dan kebiasaan sehatmu sudah berjalan beriringan. Pertahankan dan evaluasi berkala!';
-      } else if (total >= 11) {
+        desc = 'Luar biasa! Kesehatan fisik dan pengelolaan keuanganmu berjalan selaras dengan sangat baik.';
+      } else if (finScore >= 12 && healthScore < 12) {
+        profile = 'Perencana Cermat, Tubuh Butuh Perhatian';
+        lvl = 'warn';
+        themeChoice = 'loka';
+        desc = 'Keuanganmu sudah tertata rapi, namun kebiasaan sehat harian perlu ditingkatkan agar produktivitas tetap terjaga.';
+      } else if (finScore < 12 && healthScore >= 12) {
+        profile = 'Tubuh Bugar, Keuangan Perlu Dirapikan';
+        lvl = 'warn';
+        themeChoice = 'pelita';
+        desc = 'Gaya hidup sehatmu sudah sangat baik! Sekarang saatnya merapikan arus kas dan cadangan finansial.';
+      } else if (total >= 20) {
         profile = 'Penjelajah Bertumbuh';
         lvl = 'good';
-        desc = 'Sebagian kebiasaan baik sudah terbentuk. Tinggal perkuat area yang skornya masih rendah.';
+        desc = 'Sebagian kebiasaan baik sudah terbentuk di kedua sisi. Tinggal perkuat area yang skornya masih rendah.';
       }
+
       const res = document.getElementById('res-balance');
       res.innerHTML = `
-        <strong>Profil Kamu: ${profile} (Skor ${total}/18)</strong>
-        <p class="helper-text" style="margin-top:6px;">${desc}</p>
+        <strong>Profil Kamu: ${profile} (Total Skor ${total}/30)</strong>
+        <p class="helper-text" style="margin-top:6px; margin-bottom:12px;">${desc}</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:10px;">
+          <div style="background:#FFFFFF; padding:10px 12px; border-radius:10px; border:1px solid var(--pelita-light);">
+            <div style="display:flex; justify-content:space-between; font-size:0.84rem; font-weight:700; color:var(--pelita-primary);">
+              <span>Pilar Pelita (Finansial)</span><span>${finScore}/15 (${finPct}%)</span>
+            </div>
+            <div class="qprog" style="margin:6px 0 0;"><i style="width:${finPct}%; background:var(--pelita-primary);"></i></div>
+          </div>
+          <div style="background:#FFFFFF; padding:10px 12px; border-radius:10px; border:1px solid var(--loka-light);">
+            <div style="display:flex; justify-content:space-between; font-size:0.84rem; font-weight:700; color:var(--loka-primary);">
+              <span>Pilar Loka (Kesehatan)</span><span>${healthScore}/15 (${healthPct}%)</span>
+            </div>
+            <div class="qprog" style="margin:6px 0 0;"><i style="width:${healthPct}%; background:var(--yellow);"></i></div>
+          </div>
+        </div>
       `;
       res.classList.add('show');
 
+      const priority = weakHabits.length > 0 ? weakHabits[0] : habitMeta[finScore <= healthScore ? 0 : 5];
+      const prioritySteps = weakHabits.length > 0
+        ? weakHabits.slice(0, 3).map(w => `<strong>${w.label} (${w.area}):</strong> ${w.tip}`)
+        : [
+            'Pertahankan konsistensi catatan keuangan bulanan dan evaluasi target dana darurat setiap 6 bulan.',
+            'Jaga jadwal tidur 7–9 jam serta aktivitas fisik minimal 150 menit per minggu.',
+            'Gunakan kalkulator simulasi LokaPelita untuk merencanakan tujuan jangka panjang berikutnya.'
+          ];
+
       renderCalcInsight('insight-balance', {
-        theme: 'pelita',
+        theme: themeChoice,
         level: lvl,
         pill: 'SKOR KESEIMBANGAN HIDUP',
-        sub: 'Loka & Pelita',
+        sub: `Pelita ${finScore}/15 · Loka ${healthScore}/15`,
         category: 'Profil Keseimbangan Hidup',
-        mainVal: `${total} / 18`,
+        mainVal: `${total} / 30`,
         statusLabel: profile,
-        note: 'Evaluasi kebiasaan finansial & kesehatan harian',
-        why: 'Kesehatan fisik dan kestabilan finansial saling menopang: tubuh bugar menjaga produktivitas, sementara keuangan rapi menurunkan stres harian.',
-        steps: [
-          'Pilih 1 skor terendah dari 6 pertanyaan di atas sebagai fokus perbaikan selama 7 hari ke depan.',
-          'Gunakan kalkulator simulasi LokaPelita untuk mengukur target konkret (dana darurat atau kebutuhan air).',
-          'Ulangi pengecekan skor ini bulan depan untuk melihat progres kebiasaanmu.'
-        ],
-        targetPage: 'beranda',
-        targetBtnLabel: 'Kembali ke Ruang Belajar'
+        note: `Finansial ${finPct}% · Kesehatan ${healthPct}%`,
+        why: 'Keseimbangan antara kesehatan tubuh dan ketahanan finansial memastikan kamu mampu menjalani aktivitas produktif hari ini sekaligus siap menghadapi masa depan.',
+        steps: prioritySteps,
+        targetPage: priority.page,
+        targetBtnLabel: priority.btn
       });
     }
 
